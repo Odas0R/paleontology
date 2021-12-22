@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
@@ -9,7 +11,7 @@ export default function Navbar() {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
               <span className="sr-only">Paleontology</span>
-              <img
+              <Image
                 className="h-8 w-auto sm:h-10"
                 src="https://tailwindui.com/img/logos/workflow-mark.svg"
                 alt="Paleontology logo svg image"
