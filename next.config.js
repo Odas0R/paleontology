@@ -10,4 +10,8 @@ module.exports = {
   // It helps to identify unsafe life cycles, legacy API usage,
   // and a number of other features.
   reactStrictMode: true,
+  images: {
+    domains: ["images.unsplash.com"],
+    formats: ["image/avif", "image/webp"],
+  },
 };
