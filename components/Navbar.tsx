@@ -13,6 +13,8 @@ export default function Navbar() {
               <span className="sr-only">Paleontology</span>
               <Image
                 className="h-8 w-auto sm:h-10"
+                width="42px"
+                height="42px"
                 src="https://tailwindui.com/img/logos/workflow-mark.svg"
                 alt="Paleontology logo svg image"
               />

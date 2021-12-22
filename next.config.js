@@ -11,7 +11,7 @@ module.exports = {
   // and a number of other features.
   reactStrictMode: true,
   images: {
-    domains: ["images.unsplash.com"],
+    domains: ["tailwindui.com", "images.unsplash.com"],
     formats: ["image/avif", "image/webp"],
   },
 };
