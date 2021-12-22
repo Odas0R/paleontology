@@ -35,7 +35,7 @@ export default function SignUp() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+              <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40 transition-opacity" />
             </Transition.Child>
 
             {/* This element is to trick the browser into centering the modal contents. */}
@@ -70,7 +70,7 @@ export default function SignUp() {
                           elitr, sed diam nonumy eirmod tempor invidunt ut
                           labore et dolore magna aliquyam
                         </p>
-                        <button className="mt-9 w-full whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">
+                        <button className="mt-9 w-full whitespace-nowrap inline-flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">
                           <div className="w-[20%]">
                             <FcGoogle size="24" className="justify-start" />{" "}
                           </div>
