@@ -14,4 +14,11 @@ module.exports = {
     domains: ["tailwindui.com", "images.unsplash.com"],
     formats: ["image/avif", "image/webp"],
   },
+  webpackDevMiddleware: config => {
+    config.watchOptions = {
+      poll: 1000,
+      aggregateTimeout: 300,
+    };
+    return config;
+  },
 };
