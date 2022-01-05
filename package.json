@@ -12,7 +12,9 @@
     "docker:start": "docker-compose up",
     "docker:restart": "docker-compose restart",
     "docker:build": "docker-compose up -d --build",
-    "postinstall": "husky install"
+    "pre-commit": "CI=1 npm-run-all --parallel type:check && lint-staged",
+    "prepare": "husky install",
+    "husky:pre-commit": "npx husky add .husky/pre-commit 'yarn pre-commit'"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
@@ -36,21 +38,19 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "express": "^4.17.2",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "lint-staged": "^12.1.5",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.5",
-    "postinstall-postinstall": "^2.1.0",
     "tailwindcss": "^3.0.7",
     "typescript": "4.5.4"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "CI=1 npm-run-all --parallel type-check && lint-staged"
-    }
-  },
   "lint-staged": {
-    "*.+(js|ts|tsx)": ["yarn run lint"],
-    "*.+(js|json|ts|tsx)": ["yarn run format"]
+    "*.+(js|ts|tsx)": [
+      "yarn run lint"
+    ],
+    "*.+(js|json|ts|tsx)": [
+      "yarn run format"
+    ]
   }
 }
