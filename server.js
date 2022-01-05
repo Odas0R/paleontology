@@ -14,8 +14,8 @@ const handle = app.getRequestHandler();
 const server = express();
 
 const options = {
-  key: fs.readFileSync("./.certs/192.168.1.12/key.pem"),
-  cert: fs.readFileSync("./.certs/192.168.1.12/cert.pem"),
+  key: fs.readFileSync("./certs/192.168.1.12/key.pem"),
+  cert: fs.readFileSync("./certs/192.168.1.12/cert.pem"),
 };
 
 app.prepare().then(() => {
