@@ -41,7 +41,11 @@ export type TagProps = {
 } & ComponentPropsWithoutRef<"div">;
 
 export default function Tag({ color, children, ...otherProps }: TagProps) {
-  const className = classNames(classes.base, classes.color[color]);
+  const className = classNames(
+    classes.base,
+    classes.color[color],
+    otherProps.className ?? "",
+  );
   return (
     <div {...otherProps} className={className}>
       {children}
