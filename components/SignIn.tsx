@@ -1,9 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { useAuth } from "providers";
 import { Fragment, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 export default function SignIn() {
   const [open, setOpen] = useState(false);
+
+  const { signInWithGoogle } = useAuth();
 
   const cancelButtonRef = useRef(null);
   const handleOpen = () => setOpen(true);
@@ -60,7 +63,7 @@ export default function SignIn() {
                     <div className="text-center sm:text-left">
                       <Dialog.Title
                         as="h2"
-                        className="text-center text-3xl font-extrabold text-gray-900"
+                        className="text-center text-3xl font-bold text-gray-900"
                       >
                         Sign in to your account
                       </Dialog.Title>
@@ -70,7 +73,10 @@ export default function SignIn() {
                           elitr, sed diam nonumy eirmod tempor invidunt ut
                           labore et dolore magna aliquyam
                         </p>
-                        <button className="mt-9 w-full whitespace-nowrap inline-flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">
+                        <button
+                          onClick={signInWithGoogle}
+                          className="mt-9 w-full whitespace-nowrap inline-flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+                        >
                           <div className="w-[20%]">
                             <FcGoogle size="24" className="justify-start" />{" "}
                           </div>
