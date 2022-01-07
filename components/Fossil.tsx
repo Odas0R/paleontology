@@ -1,11 +1,9 @@
-import {
-  LibraryIcon,
-  LinkIcon,
-  LocationMarkerIcon,
-} from "@heroicons/react/outline";
+import { LibraryIcon, LinkIcon } from "@heroicons/react/outline";
 import Image from "next/image";
+import { useState } from "react";
 
 import type { Fossil } from "../types";
+import EventDialog from "./EventDialog";
 import Tag from "./Tag";
 
 export type FossilProps = {
@@ -13,6 +11,10 @@ export type FossilProps = {
 };
 
 export default function Fossil({ fossil }: FossilProps) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const onClose = () => setOpen(false);
+
   return (
     <div className="group relative aspect-w-1 aspect-h-1 hover:scale-[1.02] transition-all">
       <Image
@@ -46,22 +48,29 @@ export default function Fossil({ fossil }: FossilProps) {
           </div>
           <div className="flex mx-auto justify-center items-center pt-8 pb-1 gap-4">
             {fossil.links.map((link, index) => (
-              <a
-                key={index}
-                href={link.src}
-                target="_blank"
-                rel="noreferrer"
-                className="h-10 w-10 flex justify-center items-center rounded-full ring-2 ring-white bg-transparent text-white transition-transform hover:-translate-y-1"
-              >
-                {link.type === "ref" && <LinkIcon width="24px" height="24px" />}
-                {link.type === "museum" && (
-                  <LibraryIcon width="24px" height="24px" />
+              <div key={index}>
+                {link.type === "ref" && (
+                  <a
+                    href={link.src}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="h-10 w-10 flex justify-center items-center rounded-full ring-2 ring-white bg-transparent text-white transition-transform hover:-translate-y-1"
+                  >
+                    <LinkIcon width="24px" height="24px" />
+                  </a>
                 )}
-                {link.type === "geo" && (
-                  <LocationMarkerIcon width="24px" height="24px" />
-                )}
-              </a>
+              </div>
             ))}
+            {fossil.event && (
+              <EventDialog open={open} onClose={onClose} event={fossil.event}>
+                <button
+                  onClick={handleOpen}
+                  className="h-10 w-10 flex justify-center items-center rounded-full ring-2 ring-white bg-transparent text-white transition-transform hover:-translate-y-1"
+                >
+                  <LibraryIcon width="24px" height="24px" />
+                </button>
+              </EventDialog>
+            )}
           </div>
         </div>
       </div>

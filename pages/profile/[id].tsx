@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { Fragment } from "react";
 
-import Fossil from "../components/Fossil";
-import Navbar from "../components/Navbar";
-import { Fossils } from "../types";
+import Fossil from "../../components/Fossil";
+import Navbar from "../../components/Navbar";
+import { Fossils } from "../../types";
 
 const fossils: Fossils = [
   {
@@ -13,20 +13,14 @@ const fossils: Fossils = [
       color: "yellow",
     },
     name: "Encrinurus",
+    period: "Cambrian",
+    event: undefined,
     lifetime: 55.2,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     links: [
       {
         type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "museum",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "geo",
         src: "https://en.wikipedia.org/wiki/Encrinurus",
       },
     ],
@@ -37,20 +31,14 @@ const fossils: Fossils = [
       color: "gray",
     },
     name: "Encrinurus",
+    period: "Cambrian",
+    event: undefined,
     lifetime: 55.2,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     links: [
       {
         type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "museum",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "geo",
         src: "https://en.wikipedia.org/wiki/Encrinurus",
       },
     ],
@@ -61,6 +49,8 @@ const fossils: Fossils = [
       color: "indigo",
     },
     name: "Encrinurus",
+    period: "Cambrian",
+    event: undefined,
     lifetime: 55.2,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
@@ -69,19 +59,11 @@ const fossils: Fossils = [
         type: "ref",
         src: "https://en.wikipedia.org/wiki/Encrinurus",
       },
-      {
-        type: "museum",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "geo",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
     ],
   },
 ];
 
-const Home: NextPage = () => {
+const Profile: NextPage = () => {
   return (
     <Fragment>
       <Head>
@@ -128,4 +110,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Profile;

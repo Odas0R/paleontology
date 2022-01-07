@@ -1,16 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
-import { Fossils } from "types";
+import { Event } from "types";
 
 import Fossil from "./Fossil";
-
-export type Event = {
-  title: string;
-  description: string;
-  date: string;
-  name: string;
-  fossils: Fossils;
-};
 
 type EventDialogProps = {
   children: ReactNode;
@@ -88,7 +80,7 @@ export default function EventDialog({
                             <span className="text-sm">{event.date}</span>
                           </div>
                         </div>
-                        <p className="text-center mt-3 max-w-4xl space-y-6 text-justify whitespace-pre-wrap">
+                        <p className="text-center mt-3 max-w-4xl space-y-6 whitespace-pre-wrap">
                           {event.description}
                         </p>
                         {/* Display all fossils */}
