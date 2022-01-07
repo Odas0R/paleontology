@@ -2,7 +2,6 @@
   "name": "paleontology",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,7 +11,7 @@
     "type:check": "tsc --project tsconfig.json --pretty --noEmit",
     "docker:start": "docker-compose up",
     "docker:restart": "docker-compose restart",
-    "docker:build": "docker-compose up -d --build",
+    "docker:build": "docker-compose up -d --build paleontology-web",
     "pre-commit": "CI=1 npm-run-all --parallel type:check && lint-staged",
     "prepare": "husky install",
     "husky:pre-commit": "npx husky add .husky/pre-commit 'yarn pre-commit'"

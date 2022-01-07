@@ -13,10 +13,12 @@
       "warn",
       {
         "vars": "all",
-        "varsIgnorePattern": "^_",
-        "args": "after-used",
-        "argsIgnorePattern": "^_"
+        "varsIgnorePattern": "_^",
+        "args": "none"
       }
     ]
+  },
+  "env": {
+    "jest": true
   }
 }
