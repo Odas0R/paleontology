@@ -150,36 +150,100 @@ const Home: NextPage = () => {
         </div>
         <section>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-10 pb-8">
-            <div className="space-x-4">
-              <div className="aspect-w-1 aspect-h-1 relative">
+            <div className="flex -space-x-[5.2rem]">
+              <div className="relative z-50 inline object-cover border-2 border-white">
                 <Image
-                  className="object-cover rounded-lg"
+                  className="rounded-lg"
                   src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  layout="fill"
-                  alt=""
+                  width="150%"
+                  height="150%"
+                  alt="Profile image"
                 />
               </div>
-              <div className="aspect-w-1 aspect-h-1 relative">
+              <div className="relative z-40 inline object-cover border-2 border-white">
                 <Image
-                  className="object-cover rounded-lg shadow-lg z-10"
+                  className="rounded-lg"
                   src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  layout="fill"
-                  alt=""
+                  width="150%"
+                  height="150%"
+                  alt="Profile image"
+                />
+              </div>
+              <div className="relative z-30 inline object-cover border-2 border-white">
+                <Image
+                  className="rounded-lg"
+                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                  width="150%"
+                  height="150%"
+                  alt="Profile image"
+                />
+              </div>
+              <div className="relative z-20 inline object-cover border-2 border-white">
+                <Image
+                  className="rounded-lg"
+                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                  width="150%"
+                  height="150%"
+                  alt="Profile image"
+                />
+              </div>
+              <div className="relative z-10 inline object-cover border-2 border-white">
+                <Image
+                  className="rounded-lg"
+                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                  width="150%"
+                  height="150%"
+                  alt="Profile image"
                 />
               </div>
             </div>
-            {/* <Image
-              className="relative z-20 inline object-cover border-2 border-white rounded-lg"
-              layout="fill"
-              src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-              alt=""
-            />
-            <Image
-              className="relative z-10 inline object-cover border-2 border-white rounded-lg"
-              layout="fill"
-              src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-              alt=""
-            /> */}
+            <div className="flex -space-x-[5.2rem]">
+              <div className="relative z-50 inline object-cover border-2 border-white">
+                <Image
+                  className="rounded-lg"
+                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                  width="200%"
+                  height="200%"
+                  alt="Profile image"
+                />
+              </div>
+              <div className="relative z-40 inline object-cover border-2 border-white">
+                <Image
+                  className="rounded-lg"
+                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                  width="200%"
+                  height="200%"
+                  alt="Profile image"
+                />
+              </div>
+              <div className="relative z-30 inline object-cover border-2 border-white">
+                <Image
+                  className="rounded-lg"
+                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                  width="200%"
+                  height="200%"
+                  alt="Profile image"
+                />
+              </div>
+              <div className="relative z-20 inline object-cover border-2 border-white">
+                <Image
+                  className="rounded-lg"
+                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                  width="200%"
+                  height="200%"
+                  alt="Profile image"
+                />
+              </div>
+              <div className="relative z-10 inline object-cover border-2 border-white">
+                <Image
+                  className="rounded-lg"
+                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                  width="200%"
+                  height="200%"
+                  alt="Profile image"
+                />
+              </div>
+            </div>
           </div>
         </section>
         <section className="text-center pt-24 max-w-lg mx-auto">
