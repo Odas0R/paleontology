@@ -6,10 +6,12 @@ export async function middleware(req: NextRequest, _ev: NextFetchEvent) {
   let { user, error } = await getUser(req);
 
   if (error) {
+    console.error(error);
     return NextResponse.redirect(
       `/?ret=${encodeURIComponent(req.nextUrl.pathname)}`,
     );
   } else if (!user) {
+    console.log("NO USER FOUND");
     return NextResponse.redirect(
       `/?ret=${encodeURIComponent(req.nextUrl.pathname)}`,
     );
@@ -32,7 +34,7 @@ async function getUser(req: NextRequest): Promise<any> {
     {
       headers: {
         Authorization: `Bearer ${token}`,
-        APIKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+        APIKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_KEY || "",
       },
     },
   );
