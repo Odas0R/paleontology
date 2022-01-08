@@ -11,7 +11,7 @@
     "type:check": "tsc --project tsconfig.json --pretty --noEmit",
     "docker:start": "docker-compose up",
     "docker:restart": "docker-compose restart",
-    "docker:build": "docker-compose up -d --build paleontology-web",
+    "docker:build": "docker-compose up -d",
     "pre-commit": "npm-run-all --parallel type:check && lint-staged",
     "prepare": "husky install",
     "husky:pre-commit": "npx husky add .husky/pre-commit 'yarn pre-commit'"
