@@ -1,4 +1,4 @@
-import { LibraryIcon, LinkIcon } from "@heroicons/react/outline";
+import { LibraryIcon, LinkIcon, StarIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -34,6 +34,9 @@ export default function Fossil({ fossil }: FossilProps) {
             <span>GR</span>
           </div>
           <Tag color={fossil.tag.color}>{fossil.tag.text}</Tag>
+          <div className="pl-3 hidden group-hover:block text-yellow-400">
+            <StarIcon width="18px" height="18px" />
+          </div>
         </div>
         {/* bottom information */}
         <div className="hidden group-hover:block">

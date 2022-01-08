@@ -83,23 +83,23 @@ const Profile: NextPage = () => {
             </div>
           </div>
           <div className="text-left mx-auto mt-14">
-            <h1 className="text-gray-900 text-4xl tracking-tight font-bold sm:text-5xl">
+            <h1 className="text-gray-900 text-2xl tracking-tight font-bold sm:text-3xl">
               Events
             </h1>
           </div>
           {/* Display all fossils */}
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-24 pb-8">
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-16  pb-8">
             {fossils.map((fossil, index) => (
               <Fossil key={index} fossil={fossil} />
             ))}
           </section>
           <div className="text-left mx-auto mt-14">
-            <h1 className="text-gray-900 text-4xl tracking-tight font-bold sm:text-5xl">
+            <h1 className="text-gray-900 text-2xl tracking-tight font-bold sm:text-3xl">
               Fossils
             </h1>
           </div>
           {/* Display all fossils */}
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-24 pb-8">
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-16 pb-8">
             {fossils.map((fossil, index) => (
               <Fossil key={index} fossil={fossil} />
             ))}
