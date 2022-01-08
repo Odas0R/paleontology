@@ -12,7 +12,7 @@
     "docker:start": "docker-compose up",
     "docker:restart": "docker-compose restart",
     "docker:build": "docker-compose up -d --build paleontology-web",
-    "pre-commit": "CI=1 npm-run-all --parallel type:check && lint-staged",
+    "pre-commit": "npm-run-all --parallel type:check && lint-staged",
     "prepare": "husky install",
     "husky:pre-commit": "npx husky add .husky/pre-commit 'yarn pre-commit'"
   },
@@ -42,6 +42,7 @@
     "lint-staged": "^12.1.5",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.5",
+    "prettier": "^2.5.1",
     "tailwindcss": "^3.0.7",
     "typescript": "4.5.4"
   },
