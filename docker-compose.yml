@@ -37,8 +37,6 @@ services:
       - db
       - mail
     environment:
-      GOTRUE_SITE_URL: http://localhost:3000
-
       GOTRUE_JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
       GOTRUE_JWT_AUD: authenticated
       GOTRUE_JWT_EXP: 3600
@@ -51,6 +49,7 @@ services:
 
       GOTRUE_API_HOST: 0.0.0.0
       GOTRUE_API_PORT: 9999
+      GOTRUE_SITE_URL: http://localhost:3000
       GOTRUE_DISABLE_SIGNUP: 'false'
 
       GOTRUE_SMTP_HOST: mail
@@ -74,6 +73,11 @@ services:
       GOTRUE_SMS_AUTOCONFIRM: 'true'
       GOTRUE_LOG_LEVEL: DEBUG
       GOTRUE_OPERATOR_TOKEN: super-secret-operator-token
+
+      GOTRUE_EXTERNAL_GOOGLE_ENABLED: 'true'
+      GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID: 323674449364-vj4tgjuej88fo2st4tksm5jobtr5i0ir.apps.googleusercontent.com
+      GOTRUE_EXTERNAL_GOOGLE_SECRET: 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
+      GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI: http://localhost:3000/callback
   rest:
     container_name: postgrest-service
     image: postgrest/postgrest:v9.0.0 
@@ -114,9 +118,6 @@ services:
       - rest
     restart: on-failure
     environment:
-      ANON_KEY: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoiYW5vbiJ9.36fUebxgx1mcBo4s19v0SzqmzunP--hm_hep0uLX0ew
-      SERVICE_KEY: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoic2VydmljZV9yb2xlIn0.necIJaiP7X2T2QjGeV-FhpkizcNTX8HjDDBAxpgQTEI
-
       POSTGREST_URL: http://rest:3000
       PGRST_JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
       DATABASE_URL: postgres://postgres:postgres@db:5432/postgres

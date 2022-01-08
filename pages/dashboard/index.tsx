@@ -1,10 +1,9 @@
+import Fossil from "components/Fossil";
+import Navbar from "components/Navbar";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Fragment } from "react";
-
-import Fossil from "../components/Fossil";
-import Navbar from "../components/Navbar";
-import { Fossils } from "../types";
+import { Fossils } from "types";
 
 const fossils: Fossils = [
   {
@@ -95,7 +94,7 @@ const Home: NextPage = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center max-w-xl mx-auto mt-14">
             <h1 className="text-gray-900 text-4xl tracking-tight font-bold sm:text-5xl">
-              Discovering Paleontology
+              Your Workspace
             </h1>
             <p className="mt-8 max-w-3xl space-y-6">
               Paleontology is the study of the history of life on Earth as based
@@ -105,11 +104,29 @@ const Home: NextPage = () => {
             </p>
           </div>
         </div>
+
         {/* Display all fossils */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-24 pb-8">
-          {fossils.map((fossil, index) => (
-            <Fossil key={index} fossil={fossil} />
-          ))}
+        <section className="pt-24 pb-8">
+          <h4 className="text-2xl text-gray-900 font-semibold mb-8">
+            Favourites
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+            {fossils.map((fossil, index) => (
+              <Fossil key={index} fossil={fossil} />
+            ))}
+          </div>
+        </section>
+
+        {/* Display all fossils */}
+        <section className="pt-24 pb-8">
+          <h4 className="text-2xl text-gray-900 font-semibold mb-8">
+            Your Fossils
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+            {fossils.map((fossil, index) => (
+              <Fossil key={index} fossil={fossil} />
+            ))}
+          </div>
         </section>
       </main>
     </Fragment>

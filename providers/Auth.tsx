@@ -9,10 +9,23 @@ import {
   useState,
 } from "react";
 
+export type SignInPayload = {
+  email: string;
+  password: string;
+};
+
+export type SignUpPayload = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 export interface AuthContextInterface {
   user: User | null;
   session: Session | null;
   loading: boolean;
+  signIn: (payload: SignInPayload) => Promise<void>;
+  signUp: (payload: SignUpPayload) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
 }
@@ -29,6 +42,18 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const signIn = async ({ email, password }: SignInPayload) => {
+    setLoading(true);
+    try {
+      const { error } = await db.auth.signIn({ email, password });
+      if (error) throw error;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const signInWithGoogle = async () => {
     setLoading(true);
     try {
@@ -36,6 +61,21 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
         provider: "google",
       });
 
+      if (error) throw error;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signUp = async ({ name, email, password }: SignUpPayload) => {
+    setLoading(true);
+    try {
+      const { error } = await db.auth.signUp(
+        { email, password },
+        { data: { name } },
+      );
       if (error) throw error;
     } catch (error) {
       console.error(error);
@@ -102,6 +142,8 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
     session,
     user,
     loading,
+    signIn,
+    signUp,
     signInWithGoogle,
     signOut,
   };
