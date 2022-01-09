@@ -1,16 +1,17 @@
 import { TagColor } from "../components/Tag";
 
 export type FossilPeriod =
-  | "Paleogene"
-  | "Cretaceous"
-  | "Jurassic"
-  | "Triassic"
-  | "Permian"
-  | "Carboniferous"
-  | "Devonian"
-  | "Silurian"
-  | "Ordovician"
-  | "Cambrian";
+  | "paleogene"
+  | "cretaceous"
+  | "jurassic"
+  | "triassic"
+  | "permian"
+  | "carboniferous"
+  | "devonian"
+  | "silurian"
+  | "ordovician"
+  | "cambrian"
+  | "precambrian";
 
 export type Tag = {
   text: string;

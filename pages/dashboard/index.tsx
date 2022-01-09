@@ -17,7 +17,7 @@ const fossils: Fossils = [
     },
     name: "Encrinurus",
     lifetime: 55.2,
-    period: "Jurassic",
+    period: "jurassic",
     event: undefined,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
@@ -29,7 +29,7 @@ const fossils: Fossils = [
       color: "gray",
     },
     name: "Encrinurus",
-    period: "Jurassic",
+    period: "jurassic",
     event: undefined,
     lifetime: 55.2,
     imgSrc:
@@ -42,7 +42,7 @@ const fossils: Fossils = [
       color: "indigo",
     },
     name: "Encrinurus",
-    period: "Jurassic",
+    period: "jurassic",
     event: undefined,
     lifetime: 55.2,
     imgSrc:
