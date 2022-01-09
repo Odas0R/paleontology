@@ -8,6 +8,7 @@ import type { EventEntity as EventEntity } from "../types";
 
 const Events: NextPage = () => {
   const [events, setEvents] = useState<EventEntity[]>([]);
+
   useEffect(() => {
     const getEvents = async () => {
       setEvents([]);
@@ -15,6 +16,7 @@ const Events: NextPage = () => {
 
     getEvents();
   }, []);
+
   return (
     <Fragment>
       <Head>

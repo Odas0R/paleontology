@@ -15,8 +15,20 @@ export async function getAll(): Promise<Fossils> {
   return data;
 }
 
-const FossilsService = {
-  getAll,
-};
+export async function getAllByTag(tag: string): Promise<Fossils> {
+  const data = db.getData(
+    await db
+      .from(TABLE_OR_VIEW_NAME)
+      .select(
+        "id, name, lifetime, tag!value(*), img_src, period, reference_url, author:user_profile(*), event(*)",
+      )
+      .eq("tag", tag),
+  );
 
-export default FossilsService;
+  return data;
+}
+
+export const FossilsService = {
+  getAll,
+  getAllByTag,
+};

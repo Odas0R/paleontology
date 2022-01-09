@@ -1,26 +1,44 @@
 import Fossil from "components/Fossil";
+import Tag from "components/Tag";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Fragment, useEffect, useState } from "react";
-import FossilsService from "services/fossil.service";
-import { FossilEntity } from "types";
+import { FossilsService, TagService } from "services";
+import { FossilEntity, TagEntity } from "types";
 
 import Navbar from "../components/Navbar";
 
 const Home: NextPage = () => {
-  const [fossils, setFossils] = useState<FossilEntity[]>();
-  // const [selectedTag, setSelectedTag] = useState<string>("");
-  // const selectTag = (tag: string) =>
-  //   tag === selectedTag ? setSelectedTag("") : setSelectedTag(tag);
+  const [tags, setTags] = useState<TagEntity[]>([]);
+  const [fossils, setFossils] = useState<FossilEntity[]>([]);
+  const [selectedTag, setSelectedTag] = useState<string>("");
+
+  const selectTag = (tag: string) =>
+    tag === selectedTag ? setSelectedTag("") : setSelectedTag(tag);
 
   useEffect(() => {
-    const getFossils = async () => {
-      const fossils = await FossilsService.getAll();
-      setFossils(fossils);
+    const getData = async () => {
+      const tagsData = await TagService.getAll();
+      setTags(tagsData);
     };
 
-    getFossils();
+    getData();
   }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      if (selectedTag === "") {
+        const fossilsData = await FossilsService.getAll();
+        setFossils(fossilsData);
+        return;
+      }
+
+      const fossilsData = await FossilsService.getAllByTag(selectedTag);
+      setFossils(fossilsData);
+    };
+
+    getData();
+  }, [selectedTag]);
 
   return (
     <Fragment>
@@ -46,18 +64,18 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        {/* <section className="text-center pt-24 max-w-lg mx-auto"> */}
-        {/*   {tags.map((tag, index) => ( */}
-        {/*     <Tag */}
-        {/*       className="mx-6 mt-5 cursor-pointer hover:scale-105 transition-transform" */}
-        {/*       onClick={() => selectTag(tag.text)} */}
-        {/*       key={index} */}
-        {/*       color={tag.color} */}
-        {/*     > */}
-        {/*       {tag.text} */}
-        {/*     </Tag> */}
-        {/*   ))} */}
-        {/* </section> */}
+        <section className="text-center pt-24 max-w-lg mx-auto">
+          {tags.map((tag, index) => (
+            <Tag
+              className="mx-6 mt-5 cursor-pointer hover:scale-105 transition-transform"
+              onClick={() => selectTag(tag.value)}
+              key={index}
+              color={tag.color}
+            >
+              {tag.value}
+            </Tag>
+          ))}
+        </section>
 
         {/* Display all fossils */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-24 pb-8">
