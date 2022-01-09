@@ -24,8 +24,7 @@ export default function Fossil({ fossil, favourite, editable }: FossilProps) {
 
   const onSubmit = (data: FossilFormData) => console.log(data);
 
-  // const handleRemove = () => console.log("removed fossil");
-  // const handleEdit = () => console.log("edit fossil");
+  const handleRemove = () => console.log("removed fossil");
   const handleFavourite = () => console.log("added to favourite");
   const handleUnfavourite = () => console.log("unfavourite");
 
@@ -105,6 +104,7 @@ export default function Fossil({ fossil, favourite, editable }: FossilProps) {
               open={open}
               onClose={onClose}
               onSubmit={onSubmit}
+              handleRemove={handleRemove}
               initialValue={fossil}
             >
               <button

@@ -26,6 +26,19 @@ export default function Navbar() {
               </a>
             </Link>
           </div>
+          <div className="flex justify-center lg:w-0 lg:flex-1">
+            <Link href="/index">
+              <a className=" mr-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
+                Discover
+              </a>
+            </Link>
+
+            <Link href="/events">
+              <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
+                Events
+              </a>
+            </Link>
+          </div>
           <div className="flex items-center justify-end md:flex-1 lg:w-0">
             {user ? (
               <>

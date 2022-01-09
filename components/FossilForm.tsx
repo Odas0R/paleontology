@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { Fossil, FossilPeriod } from "types";
 
 type FossilFormProps = {
@@ -8,6 +8,7 @@ type FossilFormProps = {
   open: boolean;
   initialValue?: Fossil;
   onSubmit: (data: FossilFormData) => void;
+  handleRemove?: () => void;
   onClose: () => void;
 };
 
@@ -17,7 +18,7 @@ export type FossilFormData = {
   wikipediaReference: string;
   type: string;
   period: FossilPeriod;
-  image: File;
+  image: FileList;
 };
 
 export default function FossilForm({
@@ -26,12 +27,19 @@ export default function FossilForm({
   initialValue,
   onSubmit,
   onClose,
+  handleRemove,
 }: FossilFormProps) {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FossilFormData>();
+
+  const image = useWatch({
+    control,
+    name: "image",
+  });
 
   return (
     <Fragment>
@@ -80,7 +88,7 @@ export default function FossilForm({
                     >
                       {initialValue ? "Edit Fossil" : "Add Fossil"}
                     </Dialog.Title>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={e => e.preventDefault()}>
                       <div className="overflow-hidden sm:rounded-md">
                         <div className="p-2">
                           <div className="grid grid-cols-6 gap-6">
@@ -134,7 +142,7 @@ export default function FossilForm({
                                 Wikipedia Reference (URL)
                               </label>
                               <input
-                                type="text"
+                                type="url"
                                 id="wikipediaReference"
                                 className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                 defaultValue={initialValue?.referenceUrl}
@@ -163,16 +171,17 @@ export default function FossilForm({
                                 defaultValue={initialValue?.tag.text}
                                 {...register("type", { required: true })}
                               >
-                                <option value="" disabled hidden></option>
-                                <option value="Index">Index</option>
-                                <option value="Trace">Trace</option>
-                                <option value="Transitional">
+                                <option value={undefined} hidden></option>
+                                <option value="index">Index</option>
+                                <option value="trace">Trace</option>
+                                <option value="transitional">
                                   Transitional
                                 </option>
-                                <option value="Microfossil">Microfossil</option>
-                                <option value="Resin">Resin</option>
-                                <option value="Derived">Derived</option>
-                                <option value="Wood">Wood</option>
+                                <option value="microfossil">Microfossil</option>
+                                <option value="resin">Resin</option>
+                                <option value="derived">Derived</option>
+                                <option value="wood">Wood</option>
+                                <option value="true Form">True Form</option>
                               </select>
                               {errors.type?.type === "required" && (
                                 <p className="text-red-500 text-sm mt-3">
@@ -193,19 +202,19 @@ export default function FossilForm({
                                 defaultValue={initialValue?.period}
                                 {...register("period", { required: true })}
                               >
-                                <option value="" disabled hidden></option>
-                                <option value="Paleogene">Paleogene</option>
-                                <option value="Cretaceous">Cretaceous</option>
-                                <option value="Jurassic">Jurassic</option>
-                                <option value="Triassic">Triassic</option>
-                                <option value="Permian">Permian</option>
-                                <option value="Carboniferous">
+                                <option value={undefined} hidden></option>
+                                <option value="paleogene">Paleogene</option>
+                                <option value="cretaceous">Cretaceous</option>
+                                <option value="jurassic">Jurassic</option>
+                                <option value="triassic">Triassic</option>
+                                <option value="permian">Permian</option>
+                                <option value="carboniferous">
                                   Carboniferous
                                 </option>
-                                <option value="Devonian">Devonian</option>
-                                <option value="Silurian">Silurian</option>
-                                <option value="Ordovician">Ordovician</option>
-                                <option value="Cambrian">Cambrian</option>
+                                <option value="devonian">Devonian</option>
+                                <option value="silurian">Silurian</option>
+                                <option value="ordovician">Ordovician</option>
+                                <option value="cambrian">Cambrian</option>
                               </select>
                               {errors.period?.type === "required" && (
                                 <p className="text-red-500 text-sm mt-3">
@@ -251,13 +260,22 @@ export default function FossilForm({
                                           type="file"
                                           accept=".jpg,.jpeg,.png"
                                           className="sr-only"
-                                          {...register("image")}
+                                          {...register("image", {
+                                            required:
+                                              initialValue === undefined,
+                                          })}
                                         />
                                       </label>
                                     </div>
                                     <p className="text-xs text-gray-500">
                                       PNG, JPG, JPEG
                                     </p>
+                                    {image !== undefined &&
+                                      image.length > 0 && (
+                                        <p className="text-xs text-gray-500">
+                                          File Uploaded: {image[0].name}
+                                        </p>
+                                      )}
                                   </div>
                                 </div>
                               </div>
@@ -271,11 +289,16 @@ export default function FossilForm({
                         </div>
 
                         <div className="px-4 py-3 text-right sm:px-6">
-                          <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mr-3">
-                            Delete
-                          </button>
+                          {initialValue && (
+                            <button
+                              onClick={handleRemove}
+                              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mr-3"
+                            >
+                              Delete
+                            </button>
+                          )}
                           <button
-                            type="submit"
+                            onClick={handleSubmit(onSubmit)}
                             className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
                           >
                             Save

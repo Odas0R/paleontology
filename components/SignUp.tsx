@@ -28,12 +28,12 @@ export default function SignUp() {
 
   return (
     <Fragment>
-      <a
-        className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-emerald-600 hover:bg-emerald-700"
+      <button
+        className="ml-6 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-emerald-600 hover:bg-emerald-700"
         onClick={handleOpen}
       >
         Sign Up
-      </a>
+      </button>
 
       <Transition.Root show={open} as={Fragment}>
         <Dialog
