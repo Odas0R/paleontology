@@ -18,20 +18,7 @@ const fossils: Fossils = [
     event: undefined,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "museum",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "geo",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
   {
     tag: {
@@ -44,20 +31,7 @@ const fossils: Fossils = [
     lifetime: 55.2,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "museum",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "geo",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
   {
     tag: {
@@ -70,20 +44,7 @@ const fossils: Fossils = [
     lifetime: 55.2,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "museum",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "geo",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
 ];
 
@@ -111,6 +72,7 @@ const Home: NextPage = () => {
             </p>
           </div>
         </div>
+
         {/* Display all fossils */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-24 pb-8">
           {fossils.map((fossil, index) => (

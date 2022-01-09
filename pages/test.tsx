@@ -1,4 +1,5 @@
 import FossilForm, { FossilFormData } from "components/FossilForm";
+import { useDisclosure } from "hooks";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -21,12 +22,7 @@ const fossils2: Fossils = [
     period: "Cambrian",
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
   {
     tag: {
@@ -39,12 +35,7 @@ const fossils2: Fossils = [
     lifetime: 55.2,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
 ];
 
@@ -59,7 +50,6 @@ const fossilsData: Fossils = [
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta consequat feugiat. Ut id velit scelerisque mi mattis interdum. Vivamus commodo finibus metus et viverra. Proin a tincidunt turpis. Cras sit amet urna venenatis, vehicula eros eget, porta augue. Aenean lacinia dapibus quam congue lobortis. Cras at feugiat nisl.\n\nNunc cursus vitae magna tincidunt accumsan. Praesent feugiat odio et aliquam maximus. In ante enim, consectetur sit amet nisi at, congue gravida enim. Aliquam interdum lorem sem, eu semper est rhoncus a. Aenean ultrices, metus at consequat lacinia, purus lectus tempus nibh, a dapibus quam augue at velit. Nulla nec nisl nec tortor aliquam maximus eu ultricies neque. Etiam elementum nulla ac libero convallis, et tincidunt nulla ullamcorper. Nam ex lorem, bibendum quis mauris sit amet, sodales sodales tellus. Nunc sed tellus fermentum, rhoncus nunc ut.",
       date: "01-2022",
-      name: "Gonçalo Prates",
       fossils: fossils2,
     },
     name: "Encrinurus",
@@ -67,12 +57,7 @@ const fossilsData: Fossils = [
     period: "Cambrian",
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
   {
     tag: {
@@ -84,7 +69,6 @@ const fossilsData: Fossils = [
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta consequat feugiat. Ut id velit scelerisque mi mattis interdum. Vivamus commodo finibus metus et viverra. Proin a tincidunt turpis. Cras sit amet urna venenatis, vehicula eros eget, porta augue. Aenean lacinia dapibus quam congue lobortis. Cras at feugiat nisl.\n\nNunc cursus vitae magna tincidunt accumsan. Praesent feugiat odio et aliquam maximus. In ante enim, consectetur sit amet nisi at, congue gravida enim. Aliquam interdum lorem sem, eu semper est rhoncus a. Aenean ultrices, metus at consequat lacinia, purus lectus tempus nibh, a dapibus quam augue at velit. Nulla nec nisl nec tortor aliquam maximus eu ultricies neque. Etiam elementum nulla ac libero convallis, et tincidunt nulla ullamcorper. Nam ex lorem, bibendum quis mauris sit amet, sodales sodales tellus. Nunc sed tellus fermentum, rhoncus nunc ut.",
       date: "01-2022",
-      name: "Gonçalo Prates",
       fossils: [],
     },
     name: "Encrinurus",
@@ -92,12 +76,7 @@ const fossilsData: Fossils = [
     period: "Cambrian",
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
   {
     tag: {
@@ -109,7 +88,6 @@ const fossilsData: Fossils = [
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta consequat feugiat. Ut id velit scelerisque mi mattis interdum. Vivamus commodo finibus metus et viverra. Proin a tincidunt turpis. Cras sit amet urna venenatis, vehicula eros eget, porta augue. Aenean lacinia dapibus quam congue lobortis. Cras at feugiat nisl.\n\nNunc cursus vitae magna tincidunt accumsan. Praesent feugiat odio et aliquam maximus. In ante enim, consectetur sit amet nisi at, congue gravida enim. Aliquam interdum lorem sem, eu semper est rhoncus a. Aenean ultrices, metus at consequat lacinia, purus lectus tempus nibh, a dapibus quam augue at velit. Nulla nec nisl nec tortor aliquam maximus eu ultricies neque. Etiam elementum nulla ac libero convallis, et tincidunt nulla ullamcorper. Nam ex lorem, bibendum quis mauris sit amet, sodales sodales tellus. Nunc sed tellus fermentum, rhoncus nunc ut.",
       date: "01-2022",
-      name: "Gonçalo Prates",
       fossils: [],
     },
     name: "Encrinurus",
@@ -117,12 +95,7 @@ const fossilsData: Fossils = [
     period: "Cambrian",
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
 ];
 
@@ -143,10 +116,7 @@ const tags: { text: string; color: TagColor }[] = [
 const Home: NextPage = () => {
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [fossils, setFossils] = useState(fossilsData);
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const onClose = () => setOpen(false);
+  const { open, handleOpen, onClose } = useDisclosure();
 
   const selectTag = (tag: string) =>
     tag === selectedTag ? setSelectedTag("") : setSelectedTag(tag);

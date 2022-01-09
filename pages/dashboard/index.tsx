@@ -1,5 +1,9 @@
+import { PlusCircleIcon } from "@heroicons/react/outline";
+import EventForm, { EventFormData } from "components/EventForm";
 import Fossil from "components/Fossil";
+import FossilForm, { FossilFormData } from "components/FossilForm";
 import Navbar from "components/Navbar";
+import { useDisclosure } from "hooks";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Fragment } from "react";
@@ -17,20 +21,7 @@ const fossils: Fossils = [
     event: undefined,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "museum",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "geo",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
   {
     tag: {
@@ -43,20 +34,7 @@ const fossils: Fossils = [
     lifetime: 55.2,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "museum",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "geo",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
   {
     tag: {
@@ -69,24 +47,20 @@ const fossils: Fossils = [
     lifetime: 55.2,
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    links: [
-      {
-        type: "ref",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "museum",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-      {
-        type: "geo",
-        src: "https://en.wikipedia.org/wiki/Encrinurus",
-      },
-    ],
+    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
   },
 ];
 
 const Home: NextPage = () => {
+  const { open, handleOpen, onClose } = useDisclosure();
+  const {
+    open: openEvent,
+    handleOpen: handleOpenEvent,
+    onClose: onCloseEvent,
+  } = useDisclosure();
+
+  const onSubmit = (data: FossilFormData) => console.log(data);
+
   return (
     <Fragment>
       <Head>
@@ -111,26 +85,68 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        {/* Display all fossils */}
+        {/* Display Favourite Fossils */}
         <section className="pt-24 pb-8">
-          <h4 className="text-2xl text-gray-900 font-semibold mb-8">
+          <h4 className="text-2xl sm:text-3xl text-gray-900 font-semibold mb-12">
             Favourites
           </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {fossils.map((fossil, index) => (
-              <Fossil key={index} fossil={fossil} />
+              <Fossil favourite key={index} fossil={fossil} />
+            ))}
+          </div>
+        </section>
+
+        {/* Display Favourite Fossils */}
+        <section className="pt-24 pb-8">
+          <div className="flex justify-between items-center mb-12">
+            <h4 className="text-2xl sm:text-3xl text-gray-900 font-semibold">
+              Events
+            </h4>
+            <EventForm
+              open={openEvent}
+              onClose={onCloseEvent}
+              onSubmit={(data: EventFormData) => console.log(data)}
+            >
+              <button
+                onClick={handleOpenEvent}
+                className="inline-flex justify-center items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+              >
+                <span className="mr-1">
+                  <PlusCircleIcon width="18px" height="18px" />
+                </span>{" "}
+                Add Event
+              </button>
+            </EventForm>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {fossils.map((fossil, index) => (
+              <Fossil favourite key={index} fossil={fossil} />
             ))}
           </div>
         </section>
 
         {/* Display all fossils */}
         <section className="pt-24 pb-8">
-          <h4 className="text-2xl text-gray-900 font-semibold mb-8">
-            Your Fossils
-          </h4>
+          <div className="flex justify-between items-center mb-12">
+            <h4 className="text-2xl sm:text-3xl text-gray-900 font-semibold">
+              Fossils
+            </h4>
+            <FossilForm open={open} onClose={onClose} onSubmit={onSubmit}>
+              <button
+                onClick={handleOpen}
+                className="inline-flex justify-center items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+              >
+                <span className="mr-1">
+                  <PlusCircleIcon width="18px" height="18px" />
+                </span>{" "}
+                Add Fossil
+              </button>
+            </FossilForm>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
             {fossils.map((fossil, index) => (
-              <Fossil key={index} fossil={fossil} />
+              <Fossil editable key={index} fossil={fossil} />
             ))}
           </div>
         </section>

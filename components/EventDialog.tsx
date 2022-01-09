@@ -73,10 +73,10 @@ export default function EventDialog({
                       <div className="mt-6 mx-auto">
                         <div className="my-10">
                           <div className="flex h-10 w-10 text-center justify-center items-center rounded-full ring-2 ring-blue-500 bg-blue-500 text-white mx-auto">
-                            <span>{getInitialsFromName(event.name)}</span>
+                            <span>{getInitialsFromName(event.title)}</span>
                           </div>
                           <div className="text-center justify-center items-center text-gray-500 mt-4 space-x-6">
-                            <span className="text-sm">{event.name}</span>
+                            <span className="text-sm">{event.title}</span>
                             <span className="text-sm">{event.date}</span>
                           </div>
                         </div>
