@@ -1,17 +1,38 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
+import { useForm } from "react-hook-form";
+import { FossilPeriod } from "types";
 
 type FossilFormProps = {
   children: ReactNode;
   open: boolean;
+  initialValue?: FossilFormData;
+  onSubmit: (data: FossilFormData) => void;
   onClose: () => void;
+};
+
+export type FossilFormData = {
+  name: string;
+  lifetime: number;
+  wikipediaReference: string;
+  type: string;
+  period: FossilPeriod;
+  image: File;
 };
 
 export default function FossilForm({
   children,
   open,
+  initialValue,
+  onSubmit,
   onClose,
 }: FossilFormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FossilFormData>();
+
   return (
     <Fragment>
       {children}
@@ -56,57 +77,75 @@ export default function FossilForm({
                     <div>
                       <Dialog.Title
                         as="h1"
-                        className="text-center text-gray-900 text-4xl tracking-tight font-bold sm:text-5xl mb-6"
+                        className="text-center text-gray-900 text-3xl tracking-tight font-bold sm:text-4xl mb-6"
                       >
-                        Add a Fossil
+                        {initialValue ? "Edit Fossil" : "Add Fossil"}
                       </Dialog.Title>
-                      <form action="#" method="POST">
+                      <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="overflow-hidden sm:rounded-md">
                           <div className="px-4 py-5 sm:p-6">
                             <div className="grid grid-cols-6 gap-6">
                               <div className="col-span-6 sm:col-span-3">
                                 <label
-                                  htmlFor="species-name"
+                                  htmlFor="name"
                                   className="block text-sm font-medium text-gray-700"
                                 >
                                   Species Name
                                 </label>
                                 <input
                                   type="text"
-                                  name="species-name"
-                                  id="species-name"
-                                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                  id="name"
+                                  className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                  {...register("name", { required: true })}
                                 />
+                                {errors.name?.type === "required" && (
+                                  <p className="text-red-500 text-sm mt-3">
+                                    A name is required.
+                                  </p>
+                                )}
                               </div>
 
                               <div className="col-span-6 sm:col-span-3">
                                 <label
-                                  htmlFor="fossil-age"
+                                  htmlFor="lifetime"
                                   className="block text-sm font-medium text-gray-700"
                                 >
                                   Fossil Age (in Million years)
                                 </label>
                                 <input
                                   type="text"
-                                  name="fossil-age"
-                                  id="fossil-age"
-                                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                  id="lifetime"
+                                  className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                  {...register("lifetime", { required: true })}
                                 />
+                                {errors.lifetime?.type === "required" && (
+                                  <p className="text-red-500 text-sm mt-3">
+                                    A time is required.
+                                  </p>
+                                )}
                               </div>
 
-                              <div className="col-span-6 sm:col-span-4">
+                              <div className="col-span-6">
                                 <label
-                                  htmlFor="wiki-ref"
+                                  htmlFor="wikipediaReference"
                                   className="block text-sm font-medium text-gray-700"
                                 >
                                   Wikipedia Reference (URL)
                                 </label>
                                 <input
                                   type="text"
-                                  name="wiki-ref"
-                                  id="wiki-ref"
-                                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                  id="wikipediaReference"
+                                  className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                  {...register("wikipediaReference", {
+                                    required: true,
+                                  })}
                                 />
+                                {errors.wikipediaReference?.type ===
+                                  "required" && (
+                                  <p className="text-red-500 text-sm mt-3">
+                                    A reference is required.
+                                  </p>
+                                )}
                               </div>
 
                               <div className="col-span-6 sm:col-span-3">
@@ -117,21 +156,29 @@ export default function FossilForm({
                                   Fossil Type
                                 </label>
                                 <select
+                                  defaultValue=""
                                   id="type"
-                                  name="type"
-                                  className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                  className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+                                  {...register("type", { required: true })}
                                 >
-                                  <option disabled selected hidden>
-                                    Select One
+                                  <option value="" disabled hidden></option>
+                                  <option value="Index">Index</option>
+                                  <option value="Trace">Trace</option>
+                                  <option value="Transitional">
+                                    Transitional
                                   </option>
-                                  <option>Index</option>
-                                  <option>Trace</option>
-                                  <option>Transitional</option>
-                                  <option>Microfossil</option>
-                                  <option>Resin</option>
-                                  <option>Derived</option>
-                                  <option>Wood</option>
+                                  <option value="Microfossil">
+                                    Microfossil
+                                  </option>
+                                  <option value="Resin">Resin</option>
+                                  <option value="Derived">Derived</option>
+                                  <option value="Wood">Wood</option>
                                 </select>
+                                {errors.type?.type === "required" && (
+                                  <p className="text-red-500 text-sm mt-3">
+                                    A type is required.
+                                  </p>
+                                )}
                               </div>
                               <div className="col-span-6 sm:col-span-3">
                                 <label
@@ -141,24 +188,30 @@ export default function FossilForm({
                                   Time Period
                                 </label>
                                 <select
+                                  defaultValue=""
                                   id="period"
-                                  name="period"
-                                  className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                  className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+                                  {...register("period", { required: true })}
                                 >
-                                  <option disabled selected hidden>
-                                    Select One
+                                  <option value="" disabled hidden></option>
+                                  <option value="Paleogene">Paleogene</option>
+                                  <option value="Cretaceous">Cretaceous</option>
+                                  <option value="Jurassic">Jurassic</option>
+                                  <option value="Triassic">Triassic</option>
+                                  <option value="Permian">Permian</option>
+                                  <option value="Carboniferous">
+                                    Carboniferous
                                   </option>
-                                  <option>Paleogene</option>
-                                  <option>Cretaceous</option>
-                                  <option>Jurassic</option>
-                                  <option>Triassic</option>
-                                  <option>Permian</option>
-                                  <option>Carboniferous</option>
-                                  <option>Devonian</option>
-                                  <option>Silurian</option>
-                                  <option>Ordovician</option>
-                                  <option>Cambrian</option>
+                                  <option value="Devonian">Devonian</option>
+                                  <option value="Silurian">Silurian</option>
+                                  <option value="Ordovician">Ordovician</option>
+                                  <option value="Cambrian">Cambrian</option>
                                 </select>
+                                {errors.period?.type === "required" && (
+                                  <p className="text-red-500 text-sm mt-3">
+                                    A period is required.
+                                  </p>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -170,6 +223,7 @@ export default function FossilForm({
                                   <label className="block text-sm font-medium text-gray-700">
                                     Fossil Picture
                                   </label>
+
                                   <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                     <div className="space-y-1 text-center">
                                       <svg
@@ -188,25 +242,32 @@ export default function FossilForm({
                                       </svg>
                                       <div className="flex text-sm text-gray-600">
                                         <label
-                                          htmlFor="file-upload"
-                                          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                          htmlFor="image"
+                                          className="mx-auto relative cursor-pointer bg-white rounded-md font-medium text-emerald-600 hover:text-emerald-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-emerald-500"
                                         >
                                           <span>Upload a file</span>
                                           <input
-                                            id="file-upload"
-                                            name="file-upload"
+                                            id="image"
                                             type="file"
+                                            accept=".jpg,.jpeg,.png"
                                             className="sr-only"
+                                            {...register("image", {
+                                              required: true,
+                                            })}
                                           />
                                         </label>
-                                        <p className="pl-1">or drag and drop</p>
                                       </div>
                                       <p className="text-xs text-gray-500">
-                                        PNG, JPG up to 10MB
+                                        PNG, JPG, JPEG
                                       </p>
                                     </div>
                                   </div>
                                 </div>
+                                {errors.image?.type === "required" && (
+                                  <p className="text-red-500 text-sm mt-3">
+                                    An image is required.
+                                  </p>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -214,7 +275,7 @@ export default function FossilForm({
                           <div className="px-4 py-3 text-right sm:px-6">
                             <button
                               type="submit"
-                              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
                             >
                               Save
                             </button>
