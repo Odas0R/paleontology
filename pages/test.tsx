@@ -1,4 +1,4 @@
-import FossilForm from "components/FossilForm";
+import FossilForm, { FossilFormData } from "components/FossilForm";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -158,6 +158,8 @@ const Home: NextPage = () => {
 
   useEffect(() => filterByTag(selectedTag), [selectedTag]);
 
+  const onSubmit = (data: FossilFormData) => console.log(data);
+
   return (
     <Fragment>
       <Head>
@@ -298,7 +300,7 @@ const Home: NextPage = () => {
           ))}
         </section>
         <section className="p-8 bg-gray-400 mb-10">
-          <FossilForm open={open} onClose={onClose}>
+          <FossilForm open={open} onClose={onClose} onSubmit={onSubmit}>
             <button
               onClick={handleOpen}
               className="p-3 rounded bg-green-400 border border-green-500 hover:scale-105 transition-transform "
