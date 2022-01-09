@@ -6,10 +6,12 @@ export async function middleware(req: NextRequest, _ev: NextFetchEvent) {
   let { user, error } = await getUser(req);
 
   if (error) {
+    console.error(error);
     return NextResponse.redirect(
       `/?ret=${encodeURIComponent(req.nextUrl.pathname)}`,
     );
   } else if (!user) {
+    console.log("NO USER FOUND");
     return NextResponse.redirect(
       `/?ret=${encodeURIComponent(req.nextUrl.pathname)}`,
     );
