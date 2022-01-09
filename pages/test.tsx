@@ -18,7 +18,7 @@ const fossils2: Fossils = [
     event: undefined,
     name: "Encrinurus",
     lifetime: 55.2,
-    period: "Cambrian",
+    period: "cambrian",
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     links: [
@@ -34,7 +34,7 @@ const fossils2: Fossils = [
       color: "yellow",
     },
     event: undefined,
-    period: "Cambrian",
+    period: "cambrian",
     name: "Encrinurus",
     lifetime: 55.2,
     imgSrc:
@@ -64,7 +64,7 @@ const fossilsData: Fossils = [
     },
     name: "Encrinurus",
     lifetime: 55.2,
-    period: "Cambrian",
+    period: "cambrian",
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     links: [
@@ -89,7 +89,7 @@ const fossilsData: Fossils = [
     },
     name: "Encrinurus",
     lifetime: 55.2,
-    period: "Cambrian",
+    period: "cambrian",
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     links: [
@@ -114,7 +114,7 @@ const fossilsData: Fossils = [
     },
     name: "Encrinurus",
     lifetime: 55.2,
-    period: "Cambrian",
+    period: "cambrian",
     imgSrc:
       "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     links: [

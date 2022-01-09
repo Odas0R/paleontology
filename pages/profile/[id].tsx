@@ -13,7 +13,7 @@ const fossils: Fossils = [
       color: "yellow",
     },
     name: "Encrinurus",
-    period: "Cambrian",
+    period: "cambrian",
     event: undefined,
     lifetime: 55.2,
     imgSrc:
@@ -31,7 +31,7 @@ const fossils: Fossils = [
       color: "gray",
     },
     name: "Encrinurus",
-    period: "Cambrian",
+    period: "cambrian",
     event: undefined,
     lifetime: 55.2,
     imgSrc:
@@ -49,7 +49,7 @@ const fossils: Fossils = [
       color: "indigo",
     },
     name: "Encrinurus",
-    period: "Cambrian",
+    period: "cambrian",
     event: undefined,
     lifetime: 55.2,
     imgSrc:
