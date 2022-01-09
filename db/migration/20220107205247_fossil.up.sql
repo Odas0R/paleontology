@@ -14,21 +14,21 @@ create type fossil_period as enum (
 create table if not exists public.fossil (
   id uuid default uuid_generate_v4 ()
   , name text not null
+  , tag text not null
   , lifetime decimal not null
   , img_src text not null
   , period fossil_period not null
   , reference_url text not null
 
   , user_id uuid not null
-  , tag_id uuid not null
-  , event_id uuid not null
+  , event_id uuid 
 
   , constraint fossil_pkey primary key (id)
 
   , constraint user_fkey foreign key (user_id) references
     auth.users (id) on delete cascade
-  , constraint tag_fkey foreign key (tag_id) references
-    public.tag (id) on delete cascade
+  , constraint tag_fkey foreign key (tag) references
+    public.tag (value) on delete cascade
   , constraint event_fkey foreign key (event_id) references
     public.event (id) on delete cascade
 );

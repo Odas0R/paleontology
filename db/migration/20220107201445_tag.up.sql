@@ -1,9 +1,8 @@
 create table if not exists public.tag (
-  id uuid default uuid_generate_v4 ()
-  , value text not null
+  value text not null
   , color text not null
 
-  , constraint tag_pkey primary key (id)
+  , constraint tag_pkey primary key (value)
 );
 
 alter table if exists public.tag enable row level security;

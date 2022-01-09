@@ -16,13 +16,13 @@ migrate-down1:
 
 migrate-create:
 	@read -p "Enter the migration name: " filename; \
-	migrate create -dir migration -ext "sql" $$filename
+	migrate create -dir db/migration -ext "sql" $$filename
 
 undirty:
 	@psql "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable" -c "update schema_migrations set dirty = false;"
 
 seeder:
-	@psql "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable" -c "\i db/seeder.sql"
+	@psql "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable" -c "\i ./db/seeder.sql"
 
 reset: undirty migrate-down migrate-up seeder
 

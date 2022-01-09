@@ -32,7 +32,7 @@ async function getUser(req: NextRequest): Promise<any> {
     {
       headers: {
         Authorization: `Bearer ${token}`,
-        APIKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+        APIKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_KEY || "",
       },
     },
   );
