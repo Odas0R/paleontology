@@ -1,11 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { Fragment } from "react";
 
-import Fossil from "../components/Fossil";
+import Event from "../components/Event";
 import Navbar from "../components/Navbar";
-import { Fossils } from "../types";
+import type { Event as EventEntity, Fossils } from "../types";
 
 const fossils: Fossils = [
   {
@@ -75,6 +74,45 @@ const fossils: Fossils = [
   },
 ];
 
+const events: EventEntity[] = [
+  {
+    title: "Lorem ipsum dolor sit amet, consetetur sadipscing",
+    description:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,",
+    fossils: fossils,
+  },
+  {
+    title: "Lorem ipsum dolor sit amet, consetetur sadipscing",
+    description:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,",
+    fossils: fossils,
+  },
+  {
+    title: "Lorem ipsum dolor sit amet, consetetur sadipscing",
+    description:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,",
+    fossils: fossils,
+  },
+  {
+    title: "Lorem ipsum dolor sit amet, consetetur sadipscing",
+    description:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,",
+    fossils: fossils,
+  },
+  {
+    title: "Lorem ipsum dolor sit amet, consetetur sadipscing",
+    description:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,",
+    fossils: fossils,
+  },
+  {
+    title: "Lorem ipsum dolor sit amet, consetetur sadipscing",
+    description:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,",
+    fossils: fossils,
+  },
+];
+
 const Events: NextPage = () => {
   return (
     <Fragment>
@@ -96,108 +134,11 @@ const Events: NextPage = () => {
             </p>
           </div>
         </div>
-        {/* Display all fossils */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-24 pb-8">
-          {fossils.map((fossil, index) => (
-            <Fossil key={index} fossil={fossil} />
-          ))}
-        </section>
         <section>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-10 pb-8">
-            <div className="flex -space-x-[5.2rem]">
-              <div className="relative z-50 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="150%"
-                  height="150%"
-                  alt="Profile image"
-                />
-              </div>
-              <div className="relative z-40 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="150%"
-                  height="150%"
-                  alt="Profile image"
-                />
-              </div>
-              <div className="relative z-30 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="150%"
-                  height="150%"
-                  alt="Profile image"
-                />
-              </div>
-              <div className="relative z-20 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="150%"
-                  height="150%"
-                  alt="Profile image"
-                />
-              </div>
-              <div className="relative z-10 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="150%"
-                  height="150%"
-                  alt="Profile image"
-                />
-              </div>
-            </div>
-            <div className="flex -space-x-[5.2rem]">
-              <div className="relative z-50 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="200%"
-                  height="200%"
-                  alt="Profile image"
-                />
-              </div>
-              <div className="relative z-40 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="200%"
-                  height="200%"
-                  alt="Profile image"
-                />
-              </div>
-              <div className="relative z-30 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="200%"
-                  height="200%"
-                  alt="Profile image"
-                />
-              </div>
-              <div className="relative z-20 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="200%"
-                  height="200%"
-                  alt="Profile image"
-                />
-              </div>
-              <div className="relative z-10 inline object-cover border-2 border-white">
-                <Image
-                  className="rounded-lg"
-                  src="https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  width="200%"
-                  height="200%"
-                  alt="Profile image"
-                />
-              </div>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-[4.2rem] gap-y-[2.5rem] pt-20 pb-8 pr-12">
+            {events.map((event, index) => (
+              <Event key={index} event={event} />
+            ))}
           </div>
         </section>
       </main>

@@ -1,6 +1,7 @@
+import Tag, { TagColor } from "components/Tag";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 import Fossil from "../components/Fossil";
 import Navbar from "../components/Navbar";
@@ -48,7 +49,25 @@ const fossils: Fossils = [
   },
 ];
 
+const tags: { text: string; color: TagColor }[] = [
+  { text: "Index", color: "yellow" },
+  { text: "Trace", color: "teal" },
+  { text: "Transitional", color: "cyan" },
+  { text: "Microfossil", color: "green" },
+  { text: "Resin", color: "rose" },
+  { text: "Derived", color: "orange" },
+  { text: "Wood", color: "purple" },
+  { text: "Precambrian", color: "slate" },
+  { text: "Paleozoic", color: "gray" },
+  { text: "Mesozoic", color: "green" },
+  { text: "Cenozoic", color: "amber" },
+];
+
 const Home: NextPage = () => {
+  const [selectedTag, setSelectedTag] = useState<string>("");
+  const selectTag = (tag: string) =>
+    tag === selectedTag ? setSelectedTag("") : setSelectedTag(tag);
+
   return (
     <Fragment>
       <Head>
@@ -72,6 +91,19 @@ const Home: NextPage = () => {
             </p>
           </div>
         </div>
+
+        <section className="text-center pt-24 max-w-lg mx-auto">
+          {tags.map((tag, index) => (
+            <Tag
+              className="mx-6 mt-5 cursor-pointer hover:scale-105 transition-transform"
+              onClick={() => selectTag(tag.text)}
+              key={index}
+              color={tag.color}
+            >
+              {tag.text}
+            </Tag>
+          ))}
+        </section>
 
         {/* Display all fossils */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-24 pb-8">

@@ -31,7 +31,6 @@ export type Fossil = {
 export type Event = {
   title: string;
   description: string;
-  date: string;
   fossils: Fossils;
 };
 

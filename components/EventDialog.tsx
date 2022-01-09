@@ -31,7 +31,7 @@ export default function EventDialog({
           className="fixed z-10 inset-0 overflow-y-auto"
           onClose={onClose}
         >
-          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 mx-auto w-full max-w-4xl">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -60,13 +60,13 @@ export default function EventDialog({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 align-middle max-w-4xl">
+              <div className="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 align-middle">
                 <div className="bg-white px-8 pt-10 pb-8 sm:px-8 sm:py-12 sm:pb-8">
                   <div className="flex justify-center">
-                    <div className="text-center sm:text-left">
+                    <div>
                       <Dialog.Title
                         as="h1"
-                        className="text-center text-gray-900 text-4xl tracking-tight font-bold sm:text-5xl mb-6"
+                        className="text-center text-gray-900 text-3xl tracking-tight font-bold sm:text-4xl mb-6 max-w-3xl mx-auto"
                       >
                         {event.title}
                       </Dialog.Title>
@@ -76,19 +76,23 @@ export default function EventDialog({
                             <span>{getInitialsFromName(event.title)}</span>
                           </div>
                           <div className="text-center justify-center items-center text-gray-500 mt-4 space-x-6">
-                            <span className="text-sm">{event.title}</span>
-                            <span className="text-sm">{event.date}</span>
+                            <span className="text-sm">John Doe</span>
                           </div>
                         </div>
-                        <p className="text-center mt-3 max-w-4xl space-y-6 whitespace-pre-wrap">
+                        <p className="text-center mt-3 max-w-xl space-y-6 whitespace-pre-wrap mx-auto">
                           {event.description}
                         </p>
                         {/* Display all fossils */}
-                        <section className="justify-center grid grid-cols-2 xl:grid-cols-3 gap-4 pt-24 pb-8">
-                          {event.fossils.map((fossil, index) => (
-                            <Fossil key={index} fossil={fossil} />
-                          ))}
-                        </section>
+                        <div className="pt-24">
+                          <h4 className="text-2xl sm:text-3xl text-gray-900 font-semibold mb-8">
+                            Fossils
+                          </h4>
+                          <section className="justify-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                            {event.fossils.map((fossil, index) => (
+                              <Fossil key={index} fossil={fossil} />
+                            ))}
+                          </section>
+                        </div>
                       </div>
                     </div>
                   </div>
