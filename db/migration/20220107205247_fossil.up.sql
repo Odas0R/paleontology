@@ -9,6 +9,7 @@ create type fossil_period as enum (
   , 'silurian'
   , 'ordovician'
   , 'cambrian'
+  , 'precambrian'
 );
 
 create table if not exists public.fossil (
