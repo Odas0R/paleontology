@@ -1,12 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { Fossil, FossilPeriod } from "types";
+import { FossilEntity, FossilPeriod } from "types";
 
 type FossilFormProps = {
   children: ReactNode;
   open: boolean;
-  initialValue?: Fossil;
+  initialValue?: FossilEntity;
   onSubmit: (data: FossilFormData) => void;
   handleRemove?: () => void;
   onClose: () => void;
@@ -168,7 +168,7 @@ export default function FossilForm({
                               <select
                                 id="type"
                                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
-                                defaultValue={initialValue?.tag.text}
+                                defaultValue={initialValue?.tag.value}
                                 {...register("type", { required: true })}
                               >
                                 <option value={undefined} hidden></option>

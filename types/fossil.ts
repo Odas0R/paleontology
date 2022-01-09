@@ -13,25 +13,32 @@ export type FossilPeriod =
   | "cambrian"
   | "precambrian";
 
-export type Tag = {
-  text: string;
+export type TagEntity = {
+  value: string;
   color: TagColor;
 };
 
-export type Fossil = {
-  tag: Tag;
+export type AuthorEntity = {
+  id: string;
+  name: string;
+  avatar_url: string;
+};
+
+export type FossilEntity = {
+  tag: TagEntity;
   period: FossilPeriod;
   name: string;
   lifetime: number;
-  imgSrc: string;
+  img_src: string;
   referenceUrl: string;
-  event: Event | undefined;
+  event: EventEntity | undefined;
+  author: AuthorEntity;
 };
 
-export type Event = {
+export type EventEntity = {
   title: string;
   description: string;
   fossils: Fossils;
 };
 
-export type Fossils = Fossil[];
+export type Fossils = FossilEntity[];

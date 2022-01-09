@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
-import { Event } from "types";
+import { EventEntity } from "types";
 
 import Fossil from "./Fossil";
 
@@ -8,7 +8,7 @@ type EventDialogProps = {
   children: ReactNode;
   open: boolean;
   onClose: () => void;
-  event: Event;
+  event: EventEntity;
 };
 
 function getInitialsFromName(name: string) {

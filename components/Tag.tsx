@@ -5,7 +5,7 @@ function classNames(...classes: Array<string>) {
 }
 
 const classes = {
-  base: "text-xs h-7 px-2 inline-flex font-medium items-center ring-1 rounded-full ml-auto",
+  base: "text-xs h-7 px-2 inline-flex font-medium items-center ring-1 rounded-full ml-auto capitalize",
   color: {
     yellow: "ring-yellow-100 bg-yellow-700/80 text-yellow-100",
     indigo: "ring-indigo-100 bg-indigo-700/80 text-indigo-100",

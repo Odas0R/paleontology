@@ -8,13 +8,13 @@ import {
 import { useDisclosure } from "hooks";
 import Image from "next/image";
 
-import type { Fossil } from "../types";
+import type { FossilEntity } from "../types";
 import EventDialog from "./EventDialog";
 import FossilForm, { FossilFormData } from "./FossilForm";
 import Tag from "./Tag";
 
 export type FossilProps = {
-  fossil: Fossil;
+  fossil: FossilEntity;
   editable?: boolean;
   favourite?: boolean;
 };
@@ -32,7 +32,7 @@ export default function Fossil({ fossil, favourite, editable }: FossilProps) {
     <div className="group relative aspect-w-1 aspect-h-1 hover:scale-[1.02] transition-all hover:z-10">
       <Image
         className="object-cover rounded-lg"
-        src={fossil.imgSrc}
+        src={fossil.img_src}
         layout="fill"
         alt=""
       />
@@ -46,7 +46,7 @@ export default function Fossil({ fossil, favourite, editable }: FossilProps) {
           <div className="hidden group-hover:inline-flex h-10 w-10 justify-center items-center rounded-full ring-2 ring-gray-500 bg-gray-500 text-white">
             <span>GR</span>
           </div>
-          <Tag color={fossil.tag.color}>{fossil.tag.text}</Tag>
+          <Tag color={fossil.tag.color}>{fossil.tag.value}</Tag>
         </div>
         {/* bottom information */}
         <div className="hidden group-hover:block">
@@ -105,7 +105,6 @@ export default function Fossil({ fossil, favourite, editable }: FossilProps) {
               onClose={onClose}
               onSubmit={onSubmit}
               handleRemove={handleRemove}
-              initialValue={fossil}
             >
               <button
                 onClick={handleOpen}

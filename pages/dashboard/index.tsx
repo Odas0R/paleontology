@@ -1,4 +1,5 @@
 import { PlusCircleIcon } from "@heroicons/react/outline";
+import Event from "components/Event";
 import EventForm, { EventFormData } from "components/EventForm";
 import Fossil from "components/Fossil";
 import FossilForm, { FossilFormData } from "components/FossilForm";
@@ -6,52 +7,24 @@ import Navbar from "components/Navbar";
 import { useDisclosure } from "hooks";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Fragment } from "react";
-import { Fossils } from "types";
-
-const fossils: Fossils = [
-  {
-    tag: {
-      text: "True Form",
-      color: "yellow",
-    },
-    name: "Encrinurus",
-    lifetime: 55.2,
-    period: "jurassic",
-    event: undefined,
-    imgSrc:
-      "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
-  },
-  {
-    tag: {
-      text: "True Form",
-      color: "gray",
-    },
-    name: "Encrinurus",
-    period: "jurassic",
-    event: undefined,
-    lifetime: 55.2,
-    imgSrc:
-      "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
-  },
-  {
-    tag: {
-      text: "True Form",
-      color: "indigo",
-    },
-    name: "Encrinurus",
-    period: "jurassic",
-    event: undefined,
-    lifetime: 55.2,
-    imgSrc:
-      "https://images.unsplash.com/photo-1613059312885-8a758073461b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    referenceUrl: "https://en.wikipedia.org/wiki/Encrinurus",
-  },
-];
+import { Fragment, useEffect, useState } from "react";
+import { EventEntity, Fossils } from "types";
 
 const Home: NextPage = () => {
+  const [favouriteFossils, setFavouriteFossils] = useState<Fossils>([]);
+  const [fossils, setFossils] = useState<Fossils>([]);
+  const [events, setEvents] = useState<EventEntity[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      setFavouriteFossils([]);
+      setFossils([]);
+      setEvents([]);
+    };
+
+    getData();
+  }, []);
+
   const { open, handleOpen, onClose } = useDisclosure();
   const {
     open: openEvent,
@@ -91,7 +64,7 @@ const Home: NextPage = () => {
             Favourites
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {fossils.map((fossil, index) => (
+            {favouriteFossils.map((fossil, index) => (
               <Fossil favourite key={index} fossil={fossil} />
             ))}
           </div>
@@ -120,8 +93,8 @@ const Home: NextPage = () => {
             </EventForm>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {fossils.map((fossil, index) => (
-              <Fossil favourite key={index} fossil={fossil} />
+            {events.map((event, index) => (
+              <Event key={index} event={event} />
             ))}
           </div>
         </section>

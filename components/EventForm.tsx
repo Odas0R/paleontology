@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
 import { useForm } from "react-hook-form";
-import { Event } from "types";
+import { EventEntity } from "types";
 
 // const fossils: Fossils = [
 //   {
@@ -48,7 +48,7 @@ import { Event } from "types";
 type EventFormProps = {
   children: ReactNode;
   open: boolean;
-  initialValue?: Event;
+  initialValue?: EventEntity;
   onSubmit: (data: EventFormData) => void;
   onClose: () => void;
 };

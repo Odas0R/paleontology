@@ -1,6 +1,6 @@
 import { useDisclosure } from "hooks";
 import Image from "next/image";
-import { Event as EventEntity } from "types";
+import { EventEntity as EventEntity } from "types";
 
 import EventDialog from "./EventDialog";
 
@@ -21,7 +21,7 @@ export default function Event({ event }: Props) {
           <div className="absolute h-full w-full inset-0 z-[4] shadow shadow-black rounded-lg">
             <Image
               className="rounded-lg"
-              src={event.fossils[0].imgSrc}
+              src={event.fossils[0].img_src}
               layout="fill"
               alt="Profile image"
             />
@@ -30,7 +30,7 @@ export default function Event({ event }: Props) {
             <div className="absolute h-full w-full z-[3] right-[-1rem] shadow shadow-black rounded-lg ">
               <Image
                 className="rounded-lg"
-                src={event.fossils[1].imgSrc}
+                src={event.fossils[1].img_src}
                 layout="fill"
                 alt="Profile image"
               />
@@ -40,7 +40,7 @@ export default function Event({ event }: Props) {
             <div className="absolute h-full w-full z-[2] right-[-2rem] shadow shadow-black rounded-lg">
               <Image
                 className="rounded-lg"
-                src={event.fossils[2].imgSrc}
+                src={event.fossils[2].img_src}
                 layout="fill"
                 alt="Profile image"
               />
@@ -50,7 +50,7 @@ export default function Event({ event }: Props) {
             <div className="absolute h-full w-full z-[2] right-[-2rem] shadow shadow-black rounded-lg">
               <Image
                 className="rounded-lg"
-                src={event.fossils[3].imgSrc}
+                src={event.fossils[3].img_src}
                 layout="fill"
                 alt="Profile image"
               />

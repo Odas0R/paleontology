@@ -27,7 +27,7 @@ create table if not exists public.fossil (
   , constraint fossil_pkey primary key (id)
 
   , constraint user_fkey foreign key (user_id) references
-    auth.users (id) on delete cascade
+    public.user_profile (id) on delete cascade
   , constraint tag_fkey foreign key (tag) references
     public.tag (value) on delete cascade
   , constraint event_fkey foreign key (event_id) references
