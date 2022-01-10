@@ -7,23 +7,31 @@ import Navbar from "components/Navbar";
 import { useDisclosure } from "hooks";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useAuth } from "providers";
 import { Fragment, useEffect, useState } from "react";
+import { EventService, FossilService } from "services";
 import { EventEntity, Fossils } from "types";
 
-const Home: NextPage = () => {
+const Dashboard: NextPage = () => {
+  const { user } = useAuth();
   const [favouriteFossils, setFavouriteFossils] = useState<Fossils>([]);
   const [fossils, setFossils] = useState<Fossils>([]);
   const [events, setEvents] = useState<EventEntity[]>([]);
 
   useEffect(() => {
     const getData = async () => {
-      setFavouriteFossils([]);
-      setFossils([]);
-      setEvents([]);
+      if (user) {
+        const fossils = await FossilService.getAllByAuthor(user.id);
+        const events = await EventService.getAllByAuthor(user.id);
+
+        setFavouriteFossils([]);
+        setFossils(fossils);
+        setEvents(events);
+      }
     };
 
     getData();
-  }, []);
+  }, [user]);
 
   const { open, handleOpen, onClose } = useDisclosure();
   const {
@@ -128,4 +136,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

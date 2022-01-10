@@ -11,7 +11,12 @@ module.exports = {
   // and a number of other features.
   reactStrictMode: true,
   images: {
-    domains: ["tailwindui.com", "images.unsplash.com", "upload.wikimedia.org"],
+    domains: [
+      "tailwindui.com",
+      "images.unsplash.com",
+      "upload.wikimedia.org",
+      "lh3.googleusercontent.com",
+    ],
     formats: ["image/avif", "image/webp"],
   },
   webpackDevMiddleware: config => {

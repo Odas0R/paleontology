@@ -145,7 +145,7 @@ export default function FossilForm({
                                 type="url"
                                 id="wikipediaReference"
                                 className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                defaultValue={initialValue?.referenceUrl}
+                                defaultValue={initialValue?.reference_url}
                                 {...register("wikipediaReference", {
                                   required: true,
                                 })}

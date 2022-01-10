@@ -7,7 +7,7 @@ create table if not exists public.event (
   , constraint event_pkey primary key (id)
 
   , constraint user_fkey foreign key (user_id) references
-    auth.users (id) on delete cascade
+    public.user_profile (id) on delete cascade
 );
 
 alter table if exists public.event enable row level security;

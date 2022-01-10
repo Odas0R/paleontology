@@ -6,7 +6,9 @@ import {
   TrashIcon,
 } from "@heroicons/react/outline";
 import { useDisclosure } from "hooks";
+import { getInitials } from "lib";
 import Image from "next/image";
+import Link from "next/link";
 
 import type { FossilEntity } from "../types";
 import EventDialog from "./EventDialog";
@@ -43,9 +45,21 @@ export default function Fossil({ fossil, favourite, editable }: FossilProps) {
         {/* top information */}
         <div className="flex justify-between items-center h-10">
           {/* Avatar */}
-          <div className="hidden group-hover:inline-flex h-10 w-10 justify-center items-center rounded-full ring-2 ring-gray-500 bg-gray-500 text-white">
-            <span>GR</span>
-          </div>
+          <Link href={`/profile/${fossil.author.id}`}>
+            <a className="hidden group-hover:flex h-10 w-10 justify-center items-center rounded-full ring-2 ring-gray-500 bg-gray-500 text-white relative">
+              {fossil.author.avatar_url ? (
+                <Image
+                  className="object-cover rounded-full"
+                  src={fossil.author.avatar_url}
+                  layout="fill"
+                  alt=""
+                />
+              ) : (
+                <span>{getInitials(fossil.author.name)}</span>
+              )}
+            </a>
+          </Link>
+
           <Tag color={fossil.tag.color}>{fossil.tag.value}</Tag>
         </div>
         {/* bottom information */}
@@ -61,7 +75,7 @@ export default function Fossil({ fossil, favourite, editable }: FossilProps) {
           </div>
           <div className="flex mx-auto justify-center items-center pt-8 pb-1 gap-4">
             <a
-              href={fossil.referenceUrl}
+              href={fossil.reference_url}
               target="_blank"
               rel="noreferrer"
               className="h-10 w-10 flex justify-center items-center rounded-full ring-2 ring-white bg-transparent text-white transition-transform hover:-translate-y-1"

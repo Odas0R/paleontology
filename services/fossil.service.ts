@@ -8,7 +8,7 @@ export async function getAll(): Promise<Fossils> {
     await db
       .from(TABLE_OR_VIEW_NAME)
       .select(
-        "id, name, lifetime, tag!value(*), img_src, period, reference_url, author:user_profile(*), event(*)",
+        "id, name, lifetime, tag!value(*), img_src, period, reference_url, author:user_profile(*), event(id,title,description, fossils:fossil!id(id,name,lifetime,tag!value(*),img_src,period,reference_url,author:user_profile(*)))",
       ),
   );
 
@@ -20,7 +20,7 @@ export async function getAllByTag(tag: string): Promise<Fossils> {
     await db
       .from(TABLE_OR_VIEW_NAME)
       .select(
-        "id, name, lifetime, tag!value(*), img_src, period, reference_url, author:user_profile(*), event(*)",
+        "id, name, lifetime, tag!value(*), img_src, period, reference_url, author:user_profile(*), event(id,title,description,fossils:fossil!id(id,name,lifetime,tag!value(*),img_src,period,reference_url,author:user_profile(*)))",
       )
       .eq("tag", tag),
   );
@@ -28,7 +28,21 @@ export async function getAllByTag(tag: string): Promise<Fossils> {
   return data;
 }
 
-export const FossilsService = {
+export async function getAllByAuthor(id: string): Promise<Fossils> {
+  const data = db.getData(
+    await db
+      .from(TABLE_OR_VIEW_NAME)
+      .select(
+        "id, name, lifetime, tag!value(*), img_src, period, reference_url, author:user_profile(*), event(id,title,description,fossils:fossil!id(id,name,lifetime,tag!value(*),img_src,period,reference_url,author:user_profile(*)))",
+      )
+      .eq("user_id", id),
+  );
+
+  return data;
+}
+
+export const FossilService = {
   getAll,
   getAllByTag,
+  getAllByAuthor,
 };

@@ -34,7 +34,7 @@ create table if not exists public.fossil (
     public.event (id) on delete cascade
 );
 
-alter table if exists public.link enable row level security;
+alter table if exists public.fossil enable row level security;
 
 create policy select_policy on public.fossil
   for select

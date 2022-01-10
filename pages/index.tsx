@@ -3,7 +3,7 @@ import Tag from "components/Tag";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Fragment, useEffect, useState } from "react";
-import { FossilsService, TagService } from "services";
+import { FossilService, TagService } from "services";
 import { FossilEntity, TagEntity } from "types";
 
 import Navbar from "../components/Navbar";
@@ -28,12 +28,12 @@ const Home: NextPage = () => {
   useEffect(() => {
     const getData = async () => {
       if (selectedTag === "") {
-        const fossilsData = await FossilsService.getAll();
+        const fossilsData = await FossilService.getAll();
         setFossils(fossilsData);
         return;
       }
 
-      const fossilsData = await FossilsService.getAllByTag(selectedTag);
+      const fossilsData = await FossilService.getAllByTag(selectedTag);
       setFossils(fossilsData);
     };
 

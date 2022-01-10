@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Fragment, useEffect, useState } from "react";
+import { EventService } from "services/event.service";
 
 import Event from "../components/Event";
 import Navbar from "../components/Navbar";
@@ -11,7 +12,8 @@ const Events: NextPage = () => {
 
   useEffect(() => {
     const getEvents = async () => {
-      setEvents([]);
+      const events = await EventService.getAll();
+      setEvents(events);
     };
 
     getEvents();

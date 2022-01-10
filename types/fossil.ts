@@ -30,7 +30,7 @@ export type FossilEntity = {
   name: string;
   lifetime: number;
   img_src: string;
-  referenceUrl: string;
+  reference_url: string;
   event: EventEntity | undefined;
   author: AuthorEntity;
 };

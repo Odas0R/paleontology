@@ -22,7 +22,6 @@ export default function EventDialog({
   onClose,
   event,
 }: EventDialogProps) {
-  console.log(event);
   return (
     <Fragment>
       {children}
@@ -32,7 +31,7 @@ export default function EventDialog({
           className="fixed z-10 inset-0 overflow-y-auto"
           onClose={onClose}
         >
-          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 mx-auto w-full max-w-4xl">
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 mx-auto max-w-3xl">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -61,9 +60,9 @@ export default function EventDialog({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 align-middle">
+              <div className="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 align-middle w-full">
                 <div className="bg-white px-8 pt-10 pb-8 sm:px-8 sm:py-12 sm:pb-8">
-                  <div className="flex justify-center">
+                  <div className="">
                     <div>
                       <Dialog.Title
                         as="h1"
