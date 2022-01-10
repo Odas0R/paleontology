@@ -42,9 +42,6 @@ const Home: NextPage = () => {
         const fossilsData = await FossilService.getAllByTag(selectedTag);
         setFossils(fossilsData);
       }
-
-      const fossilsData = await FossilService.getAllByTag(selectedTag);
-      setFossils(fossilsData);
     };
 
     getData();
