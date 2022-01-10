@@ -30,7 +30,17 @@ const Home: NextPage = () => {
       if (selectedTag === "") {
         const fossilsData = await FossilService.getAll();
         setFossils(fossilsData);
-        return;
+      } else if (
+        selectedTag === "precambrian" ||
+        selectedTag === "paleozoic" ||
+        selectedTag === "mesozoic" ||
+        selectedTag === "cenozoic"
+      ) {
+        const fossilsData = await FossilService.getAllFromEra(selectedTag);
+        setFossils(fossilsData);
+      } else {
+        const fossilsData = await FossilService.getAllByTag(selectedTag);
+        setFossils(fossilsData);
       }
 
       const fossilsData = await FossilService.getAllByTag(selectedTag);
@@ -67,7 +77,8 @@ const Home: NextPage = () => {
         <section className="text-center pt-24 max-w-lg mx-auto">
           {tags.map((tag, index) => (
             <Tag
-              className="mx-6 mt-5 cursor-pointer hover:scale-105 transition-transform"
+              className="mx-6 mt-5 cursor-pointer"
+              isSelected={tag.value === selectedTag}
               onClick={() => selectTag(tag.value)}
               key={index}
               color={tag.color}
