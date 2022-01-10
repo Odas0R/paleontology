@@ -25,6 +25,7 @@ export type AuthorEntity = {
 };
 
 export type FossilEntity = {
+  id: string;
   tag: TagEntity;
   period: FossilPeriod;
   name: string;

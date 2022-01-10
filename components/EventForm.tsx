@@ -1,7 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, ReactNode } from "react";
-import { useForm } from "react-hook-form";
-import { EventEntity } from "types";
+import Image from "next/image";
+import { useAuth } from "providers";
+import { Fragment, ReactNode, useEffect, useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
+import { FossilService } from "services";
+import { EventEntity, Fossils } from "types";
+
+import CheckboxFossil from "./CheckboxFossil";
 
 // const fossils: Fossils = [
 //   {
@@ -67,16 +72,31 @@ export default function EventForm({
   onClose,
 }: EventFormProps) {
   const {
-    // control,
+    control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<EventFormData>();
 
-  // const { fields, append, remove } = useFieldArray({
-  //   name: "fossils",
-  //   control,
-  // });
+  const { user } = useAuth();
+  const [fossils, setFossils] = useState<Fossils>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      if (user) {
+        const fossils = await FossilService.getAllByAuthor(user.id);
+
+        setFossils(fossils);
+      }
+    };
+
+    getData();
+  }, [user]);
+
+  const { fields, append } = useFieldArray({
+    name: "fossils" as never,
+    control,
+  });
 
   return (
     <Fragment>
@@ -172,27 +192,47 @@ export default function EventForm({
 
                             <div className="col-span-6">
                               <ul>
-                                {/* {fields.map((field, index) => ( */}
-                                {/*   <li key={field.id}> */}
-                                {/*       <CheckboxFossil /> */}
-                                {/*   </li> */}
-                                {/* )} */}
+                                {fields.map((field, index) => (
+                                  <li key={field.id}>
+                                    <CheckboxFossil
+                                      key={index}
+                                      {...register(`fossils.${index}`)}
+                                    />
+                                  </li>
+                                ))}
                               </ul>
-                            </div>
-
-                            <div className="px-4 py-3 text-right sm:px-6">
-                              <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mr-3">
-                                Delete
-                              </button>
-                              <button
-                                type="submit"
-                                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
-                              >
-                                Save
-                              </button>
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <span className="mb-2">
+                        Click on the fossils you want to select
+                      </span>
+                      <div className="justify-center grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-3 gap-4">
+                        {fossils.map((fossil, index) => (
+                          <div key={index} onClick={() => append(fossil)}>
+                            <div className="group relative aspect-w-1 aspect-h-1 hover:scale-[1.02] transition-all hover:z-10 border-[2px]  rounded-lg border-emerald-500/80">
+                              <Image
+                                className="object-cover rounded-lg"
+                                src={fossil.img_src}
+                                layout="fill"
+                                alt=""
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="px-4 py-3 text-right sm:px-6">
+                        <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mr-3">
+                          Delete
+                        </button>
+                        <button
+                          type="submit"
+                          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                        >
+                          Save
+                        </button>
                       </div>
                     </form>
                   </div>
