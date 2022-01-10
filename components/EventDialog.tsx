@@ -22,6 +22,7 @@ export default function EventDialog({
   onClose,
   event,
 }: EventDialogProps) {
+  console.log(event);
   return (
     <Fragment>
       {children}
@@ -88,7 +89,7 @@ export default function EventDialog({
                             Fossils
                           </h4>
                           <section className="justify-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                            {event.fossils.map((fossil, index) => (
+                            {event.fossils?.map((fossil, index) => (
                               <Fossil key={index} fossil={fossil} />
                             ))}
                           </section>
