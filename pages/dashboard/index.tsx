@@ -10,11 +10,13 @@ import Head from "next/head";
 import { useAuth } from "providers";
 import { Fragment, useEffect, useState } from "react";
 import { EventService, FossilService } from "services";
-import { EventEntity, Fossils } from "types";
+import { EventEntity, FossilEntity, Fossils } from "types";
 
 const Dashboard: NextPage = () => {
   const { user } = useAuth();
-  const [favouriteFossils, setFavouriteFossils] = useState<Fossils>([]);
+  const [favouriteFossils, setFavouriteFossils] = useState<
+    { fossil: FossilEntity }[]
+  >([]);
   const [fossils, setFossils] = useState<Fossils>([]);
   const [events, setEvents] = useState<EventEntity[]>([]);
 
@@ -23,8 +25,13 @@ const Dashboard: NextPage = () => {
       if (user) {
         const fossils = await FossilService.getAllByAuthor(user.id);
         const events = await EventService.getAllByAuthor(user.id);
+        const favouriteFossils = await FossilService.getAllByAuthorFavourites(
+          user.id,
+        );
 
-        setFavouriteFossils([]);
+        console.log(favouriteFossils);
+
+        setFavouriteFossils(favouriteFossils);
         setFossils(fossils);
         setEvents(events);
       }
@@ -40,7 +47,24 @@ const Dashboard: NextPage = () => {
     onClose: onCloseEvent,
   } = useDisclosure();
 
-  const onSubmit = (data: FossilFormData) => console.log(data);
+  const onSubmit = async (data: FossilFormData) => {
+    if (user) {
+      const fossilToAdd = {
+        user_id: user.id,
+        name: data.name,
+        tag: data.tag,
+        period: data.period,
+        lifetime: data.lifetime,
+        reference_url: data.reference_url,
+        img_src:
+          "https://upload.wikimedia.org/wikipedia/commons/2/21/Paradoxides_sp.jpg",
+      };
+
+      const fossil = await FossilService.create(fossilToAdd);
+
+      setFossils([...fossils, fossil]);
+    }
+  };
 
   return (
     <Fragment>
@@ -72,8 +96,8 @@ const Dashboard: NextPage = () => {
             Favourites
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {favouriteFossils.map((fossil, index) => (
-              <Fossil favourite key={index} fossil={fossil} />
+            {favouriteFossils.map(({ fossil }, index) => (
+              <Fossil favourite key={index} data={fossil} />
             ))}
           </div>
         </section>
@@ -113,6 +137,7 @@ const Dashboard: NextPage = () => {
             <h4 className="text-2xl sm:text-3xl text-gray-900 font-semibold">
               Fossils
             </h4>
+            {/* Add Fossil */}
             <FossilForm open={open} onClose={onClose} onSubmit={onSubmit}>
               <button
                 onClick={handleOpen}
@@ -127,7 +152,7 @@ const Dashboard: NextPage = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
             {fossils.map((fossil, index) => (
-              <Fossil editable key={index} fossil={fossil} />
+              <Fossil editable key={index} data={fossil} />
             ))}
           </div>
         </section>

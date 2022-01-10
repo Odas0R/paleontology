@@ -9,6 +9,9 @@ import { useDisclosure } from "hooks";
 import { getInitials } from "lib";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuth } from "providers";
+import { useState } from "react";
+import { FossilService } from "services";
 
 import type { FossilEntity } from "../types";
 import EventDialog from "./EventDialog";
@@ -16,21 +19,49 @@ import FossilForm, { FossilFormData } from "./FossilForm";
 import Tag from "./Tag";
 
 export type FossilProps = {
-  fossil: FossilEntity;
+  data: FossilEntity;
   editable?: boolean;
   favourite?: boolean;
 };
 
-export default function Fossil({ fossil, favourite, editable }: FossilProps) {
+export default function Fossil({ data, favourite, editable }: FossilProps) {
+  const [fossil, setFossil] = useState<FossilEntity | undefined>(data);
+  const { user } = useAuth();
   const { open, handleOpen, onClose } = useDisclosure();
 
-  const onSubmit = (data: FossilFormData) => console.log(data);
+  const onSubmit = async (data: FossilFormData) => {
+    // only update the params that are not null
+    const updatedData = {
+      name: data.name ? data.name : fossil?.name,
+      tag: data.tag ? data.tag : fossil?.tag.value,
+      period: data.period ? data.period : fossil?.period,
+      lifetime: data.lifetime ? data.lifetime : fossil?.lifetime,
+      reference_url: data.reference_url
+        ? data.reference_url
+        : fossil?.reference_url,
+      img_src:
+        "https://upload.wikimedia.org/wikipedia/commons/2/21/Paradoxides_sp.jpg",
+    };
 
-  const handleRemove = () => console.log("removed fossil");
-  const handleFavourite = () => console.log("added to favourite");
-  const handleUnfavourite = () => console.log("unfavourite");
+    const updatedFossil = await FossilService.update(fossil?.id, updatedData);
+    setFossil(updatedFossil);
+    onClose();
+  };
 
-  return (
+  const handleRemove = async () => {
+    await FossilService.remove(fossil?.id);
+    setFossil(undefined);
+    onClose();
+  };
+
+  const handleFavourite = async () =>
+    await FossilService.favourite(fossil?.id, user?.id);
+  const handleUnfavourite = async () => {
+    await FossilService.unfavourite(fossil?.id);
+    setFossil(undefined);
+  };
+
+  return fossil ? (
     <div className="group relative aspect-w-1 aspect-h-1 hover:scale-[1.02] transition-all hover:z-10">
       <Image
         className="object-cover rounded-lg"
@@ -119,6 +150,7 @@ export default function Fossil({ fossil, favourite, editable }: FossilProps) {
               onClose={onClose}
               onSubmit={onSubmit}
               handleRemove={handleRemove}
+              initialValue={fossil}
             >
               <button
                 onClick={handleOpen}
@@ -131,5 +163,7 @@ export default function Fossil({ fossil, favourite, editable }: FossilProps) {
         </div>
       </div>
     </div>
+  ) : (
+    <div></div>
   );
 }

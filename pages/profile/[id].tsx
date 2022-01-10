@@ -83,7 +83,7 @@ const Profile: NextPage = () => {
           {/* Display all fossils */}
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-16 pb-8">
             {fossils.map((fossil, index) => (
-              <Fossil key={index} fossil={fossil} />
+              <Fossil key={index} data={fossil} />
             ))}
           </section>
         </div>

@@ -14,10 +14,10 @@ type FossilFormProps = {
 
 export type FossilFormData = {
   name: string;
-  lifetime: number;
-  wikipediaReference: string;
-  type: string;
+  tag: string;
+  reference_url: string;
   period: FossilPeriod;
+  lifetime: number;
   image: FileList;
 };
 
@@ -34,7 +34,15 @@ export default function FossilForm({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FossilFormData>();
+  } = useForm<FossilFormData>({
+    defaultValues: initialValue && {
+      name: initialValue.name,
+      tag: initialValue.tag.value,
+      reference_url: initialValue.reference_url,
+      period: initialValue.period,
+      lifetime: initialValue.lifetime,
+    },
+  });
 
   const image = useWatch({
     control,
@@ -103,7 +111,6 @@ export default function FossilForm({
                                 type="text"
                                 id="name"
                                 className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                defaultValue={initialValue?.name}
                                 {...register("name", { required: true })}
                               />
                               {errors.name?.type === "required" && (
@@ -121,15 +128,22 @@ export default function FossilForm({
                                 Fossil Age (in Million years)
                               </label>
                               <input
-                                type="text"
+                                type="number"
                                 id="lifetime"
                                 className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                defaultValue={initialValue?.lifetime}
-                                {...register("lifetime", { required: true })}
+                                {...register("lifetime", {
+                                  required: true,
+                                  valueAsNumber: true,
+                                })}
                               />
                               {errors.lifetime?.type === "required" && (
                                 <p className="text-red-500 text-sm mt-3">
-                                  A time is required.
+                                  A age is required.
+                                </p>
+                              )}
+                              {errors.lifetime?.type === "valueAsNumber" && (
+                                <p className="text-red-500 text-sm mt-3">
+                                  The age must be a number.
                                 </p>
                               )}
                             </div>
@@ -143,15 +157,13 @@ export default function FossilForm({
                               </label>
                               <input
                                 type="url"
-                                id="wikipediaReference"
+                                id="reference_url"
                                 className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                defaultValue={initialValue?.reference_url}
-                                {...register("wikipediaReference", {
+                                {...register("reference_url", {
                                   required: true,
                                 })}
                               />
-                              {errors.wikipediaReference?.type ===
-                                "required" && (
+                              {errors.reference_url?.type === "required" && (
                                 <p className="text-red-500 text-sm mt-3">
                                   A reference is required.
                                 </p>
@@ -168,8 +180,7 @@ export default function FossilForm({
                               <select
                                 id="type"
                                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
-                                defaultValue={initialValue?.tag.value}
-                                {...register("type", { required: true })}
+                                {...register("tag", { required: true })}
                               >
                                 <option value={undefined} hidden></option>
                                 <option value="index">Index</option>
@@ -183,7 +194,7 @@ export default function FossilForm({
                                 <option value="wood">Wood</option>
                                 <option value="true Form">True Form</option>
                               </select>
-                              {errors.type?.type === "required" && (
+                              {errors.tag?.type === "required" && (
                                 <p className="text-red-500 text-sm mt-3">
                                   A type is required.
                                 </p>
@@ -199,7 +210,6 @@ export default function FossilForm({
                               <select
                                 id="period"
                                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
-                                defaultValue={initialValue?.period}
                                 {...register("period", { required: true })}
                               >
                                 <option value={undefined} hidden></option>

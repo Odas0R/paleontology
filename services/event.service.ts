@@ -8,7 +8,7 @@ export async function getAll(): Promise<EventEntity[]> {
     await db
       .from(TABLE_OR_VIEW_NAME)
       .select(
-        "id, title, description, author:user_profile!user_id(*), fossils:fossil(id,name,lifetime,tag!value(*),img_src,period,reference_url,author:user_profile(*))",
+        "id, title, description, author:user_profile!user_id(*), fossils:fossil(id,name,lifetime,tag!value(*),img_src,period,reference_url,author:user_profile!user_fkey(*))",
       ),
   );
 
@@ -20,7 +20,7 @@ export async function getAllByAuthor(id: string): Promise<EventEntity[]> {
     await db
       .from(TABLE_OR_VIEW_NAME)
       .select(
-        "id, title, description, author:user_profile!user_id(*), fossils:fossil(id,name,lifetime,tag!value(*),img_src,period,reference_url,author:user_profile(*))",
+        "id, title, description, author:user_profile!user_id(*), fossils:fossil(id,name,lifetime,tag!value(*),img_src,period,reference_url,author:user_profile!user_fkey(*))",
       )
       .eq("user_id", id),
   );

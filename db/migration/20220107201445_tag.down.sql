@@ -1,3 +1,3 @@
-drop table if exists "public".tag;
+drop table if exists public.tag;
 
 

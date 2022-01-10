@@ -34,13 +34,20 @@ insert into public.tag (value, color) values
   ('mesozoic', 'green'),
   ('cenozoic', 'amber');
 
+
+truncate table public.event cascade;
+insert into public.event (id, user_id, title, description) values
+  ('76387373-c89b-4aa0-9dc6-a3cb5b9e78ad', '81df0708-0911-38e8-97b4-e36565538222','Trip to Fossil Ravine','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus nibh nisi, sed commodo leo placerat id. Mauris finibus tincidunt turpis, ac congue urna cursus eget. Morbi quis nunc eleifend, maximus odio ac, egestas tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer quis fringilla tellus'),
+  ('99cfa2b1-5c7b-4eb5-b33c-77311fbc2243', '4626d5a2-5054-3673-8dc7-aea3fcf051e4','Internet Search','Went on Wikipedia to try and add some new entries to this website, I love it!'),
+  ('7561e246-d5b7-475e-a440-db04fe9b28a9', '05c83e48-3000-3597-ac26-671895904489','Trip to National History Museum','Collection of pictures from my day at the museum.'),
+  ('abb65712-eda7-4bd7-b8b8-3fdb0a8572c0', '05c83e48-3000-3597-ac26-671895904489','A Tour Through Time','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus nibh nisi, sed commodo leo placerat id. Mauris finibus tincidunt turpis, ac congue urna cursus eget. Morbi quis nunc eleifend, maximus odio ac, egestas tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer quis fringilla tellus. Nulla feugiat mi condimentum ante rhoncus pharetra. Proin libero libero, accumsan sed gravida a, sodales sed est. Mauris ac augue id nisl commodo molestie et vitae metus. Donec condimentum nisl at ante hendrerit fermentum et ut arcu. Ut tempor eu velit pretium pharetra. Maecenas eget volutpat lectus, id eleifend purus. Nunc urna sem, dapibus sit amet tellus nec, pellentesque interdum orci. Nunc rutrum velit at sem bibendum, eu ultricies ante tristique. Ut auctor eros a iaculis dapibus. In in risus nunc. Curabitur porta lorem dolor, sit amet tincidunt mi fermentum et.');
+
 -- ========================
 -- Fossils
 -- ========================
 
-
 truncate table public.fossil cascade;
-insert into public.fossil (name, lifetime, img_src, period, reference_url, user_id, tag_id) values
+insert into public.fossil (name, lifetime, img_src, period, reference_url, user_id, tag) values
   ('Trilobite', '521', 'https://upload.wikimedia.org/wikipedia/commons/2/21/Paradoxides_sp.jpg', 'cambrian', 'https://en.wikipedia.org/wiki/Trilobite', '81df0708-0911-38e8-97b4-e36565538222', 'index'),
   ('Inoceramidae', '299', 'https://upload.wikimedia.org/wikipedia/commons/9/99/InoceramusCretaceousSouthDakota.jpg', 'permian', 'https://en.wikipedia.org/wiki/Inoceramidae', '81df0708-0911-38e8-97b4-e36565538222', 'index'),
   ('Ammonite', '409', 'https://upload.wikimedia.org/wikipedia/commons/0/00/Pleuroceras_solare%2C_Little_Switzerland%2C_Bavaria%2C_Germany.jpg', 'devonian', 'https://en.wikipedia.org/wiki/Ammonoidea', '81df0708-0911-38e8-97b4-e36565538222', 'index'),
@@ -64,13 +71,6 @@ insert into public.fossil (name, lifetime, img_src, period, reference_url, user_
   ('Pterodactyl', '150', 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Bsp_as_i_739_modified.png', 'jurassic', 'https://en.wikipedia.org/wiki/Pterodactylus', '05c83e48-3000-3597-ac26-671895904489', 'true form'),
   ('Brachiosaurus', '154', 'https://upload.wikimedia.org/wikipedia/commons/e/ed/Brachiosaurus_mount.jpg', 'jurassic', 'https://en.wikipedia.org/wiki/Brachiosaurus', '05c83e48-3000-3597-ac26-671895904489', 'true form'),
   ('Brontosaurus', '156', 'https://upload.wikimedia.org/wikipedia/commons/4/45/Brontosaurus_Yale_Peabody_cropped.jpg', 'jurassic', 'https://en.wikipedia.org/wiki/Brontosaurus', '05c83e48-3000-3597-ac26-671895904489', 'true form');
-
-truncate table public.event;
-insert into public.event (id, user_id, title, description) values
-  ('76387373-c89b-4aa0-9dc6-a3cb5b9e78ad', '81df0708-0911-38e8-97b4-e36565538222','Trip to Fossil Ravine','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus nibh nisi, sed commodo leo placerat id. Mauris finibus tincidunt turpis, ac congue urna cursus eget. Morbi quis nunc eleifend, maximus odio ac, egestas tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer quis fringilla tellus'),
-  ('99cfa2b1-5c7b-4eb5-b33c-77311fbc2243', '4626d5a2-5054-3673-8dc7-aea3fcf051e4','Internet Search','Went on Wikipedia to try and add some new entries to this website, I love it!'),
-  ('7561e246-d5b7-475e-a440-db04fe9b28a9', '05c83e48-3000-3597-ac26-671895904489','Trip to National History Museum','Collection of pictures from my day at the museum.'),
-  ('abb65712-eda7-4bd7-b8b8-3fdb0a8572c0', '05c83e48-3000-3597-ac26-671895904489','A Tour Through Time','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus nibh nisi, sed commodo leo placerat id. Mauris finibus tincidunt turpis, ac congue urna cursus eget. Morbi quis nunc eleifend, maximus odio ac, egestas tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer quis fringilla tellus. Nulla feugiat mi condimentum ante rhoncus pharetra. Proin libero libero, accumsan sed gravida a, sodales sed est. Mauris ac augue id nisl commodo molestie et vitae metus. Donec condimentum nisl at ante hendrerit fermentum et ut arcu. Ut tempor eu velit pretium pharetra. Maecenas eget volutpat lectus, id eleifend purus. Nunc urna sem, dapibus sit amet tellus nec, pellentesque interdum orci. Nunc rutrum velit at sem bibendum, eu ultricies ante tristique. Ut auctor eros a iaculis dapibus. In in risus nunc. Curabitur porta lorem dolor, sit amet tincidunt mi fermentum et.');
 
 
 update public.fossil

@@ -32,6 +32,8 @@ create table if not exists public.fossil (
     public.tag (value) on delete cascade
   , constraint event_fkey foreign key (event_id) references
     public.event (id) on delete cascade
+
+  , constraint name_unique unique (id, name)
 );
 
 alter table if exists public.fossil enable row level security;

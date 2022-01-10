@@ -5,7 +5,8 @@ create table if not exists public.fossil_favourite (
   , constraint fossil_favourite_pkey primary key (user_id, fossil_id)
 
   , constraint user_fkey foreign key (user_id) references
-    auth.users (id) on delete cascade
+    public.user_profile (id) on delete cascade
+
   , constraint fossil_fkey foreign key (fossil_id) references
     public.fossil (id) on delete cascade
 );
