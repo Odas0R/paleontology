@@ -3,7 +3,7 @@ import {
   LinkIcon,
   PencilIcon,
   StarIcon,
-  TrashIcon,
+  UserRemoveIcon,
 } from "@heroicons/react/outline";
 import { useDisclosure } from "hooks";
 import { getInitials } from "lib";
@@ -24,13 +24,17 @@ export type FossilProps = {
   favourite?: boolean;
 };
 
-export default function Fossil({ data, favourite, editable }: FossilProps) {
+export default function Fossil({
+  data,
+  favourite = false,
+  editable,
+}: FossilProps) {
+  const [isFavourite, setFavourite] = useState(favourite);
   const [fossil, setFossil] = useState<FossilEntity | undefined>(data);
   const { user } = useAuth();
   const { open, handleOpen, onClose } = useDisclosure();
 
   const onSubmit = async (data: FossilFormData) => {
-    // only update the params that are not null
     const updatedData = {
       name: data.name ? data.name : fossil?.name,
       tag: data.tag ? data.tag : fossil?.tag.value,
@@ -54,11 +58,13 @@ export default function Fossil({ data, favourite, editable }: FossilProps) {
     onClose();
   };
 
-  const handleFavourite = async () =>
+  const handleFavourite = async () => {
     await FossilService.favourite(fossil?.id, user?.id);
+    setFavourite(true);
+  };
   const handleUnfavourite = async () => {
     await FossilService.unfavourite(fossil?.id);
-    setFossil(undefined);
+    setFavourite(false);
   };
 
   return fossil ? (
@@ -126,7 +132,7 @@ export default function Fossil({ data, favourite, editable }: FossilProps) {
             )}
           </div>
 
-          {!favourite && !editable && (
+          {!isFavourite && !editable && (
             <button
               onClick={handleFavourite}
               className="hidden group-hover:flex absolute p-[0.85rem] bg-yellow-400 rounded-full text-yellow-800 -right-5 -top-5 focus:outline-none focus:ring focus:ring-yellow-300"
@@ -135,12 +141,12 @@ export default function Fossil({ data, favourite, editable }: FossilProps) {
             </button>
           )}
 
-          {favourite && (
+          {isFavourite && (
             <button
               onClick={handleUnfavourite}
               className="hidden group-hover:flex absolute p-[0.85rem] bg-red-500 rounded-full -right-5 -top-5 focus:outline-none focus:ring focus:ring-red-400"
             >
-              <TrashIcon width="18px" height="18px" />
+              <UserRemoveIcon width="18px" height="18px" />
             </button>
           )}
 

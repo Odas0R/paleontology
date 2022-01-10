@@ -29,8 +29,6 @@ const Dashboard: NextPage = () => {
           user.id,
         );
 
-        console.log(favouriteFossils);
-
         setFavouriteFossils(favouriteFossils);
         setFossils(fossils);
         setEvents(events);

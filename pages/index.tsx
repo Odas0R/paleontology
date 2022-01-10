@@ -2,6 +2,7 @@ import Fossil from "components/Fossil";
 import Tag from "components/Tag";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useAuth } from "providers";
 import { Fragment, useEffect, useState } from "react";
 import { FossilService, TagService } from "services";
 import { FossilEntity, TagEntity } from "types";
@@ -9,12 +10,17 @@ import { FossilEntity, TagEntity } from "types";
 import Navbar from "../components/Navbar";
 
 const Home: NextPage = () => {
+  const { user } = useAuth();
   const [tags, setTags] = useState<TagEntity[]>([]);
   const [fossils, setFossils] = useState<FossilEntity[]>([]);
   const [selectedTag, setSelectedTag] = useState<string>("");
+  const [favourites, setFavourites] = useState<{ fossil: FossilEntity }[]>([]);
 
   const selectTag = (tag: string) =>
     tag === selectedTag ? setSelectedTag("") : setSelectedTag(tag);
+
+  const isFavourite = (fossilId: string) =>
+    favourites.filter(({ fossil }) => fossil.id === fossilId).length > 0;
 
   useEffect(() => {
     const getData = async () => {
@@ -24,6 +30,19 @@ const Home: NextPage = () => {
 
     getData();
   }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      if (user) {
+        const favourites = await FossilService.getAllByAuthorFavourites(
+          user.id,
+        );
+        setFavourites(favourites);
+      }
+    };
+
+    getData();
+  }, [user]);
 
   useEffect(() => {
     const getData = async () => {
@@ -87,9 +106,21 @@ const Home: NextPage = () => {
 
         {/* Display all fossils */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-24 pb-8">
-          {fossils?.map((fossil, index) => (
-            <Fossil key={index} data={fossil} />
-          ))}
+          {favourites?.length > 0
+            ? fossils?.map((fossil, index) => (
+                <Fossil
+                  key={index}
+                  data={fossil}
+                  favourite={isFavourite(fossil.id)}
+                />
+              ))
+            : fossils?.map(fossil => (
+                <Fossil
+                  key={fossil.id}
+                  data={fossil}
+                  favourite={isFavourite(fossil.id)}
+                />
+              ))}
         </section>
       </main>
     </Fragment>
