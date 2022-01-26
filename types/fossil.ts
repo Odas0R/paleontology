@@ -40,6 +40,7 @@ export type EventEntity = {
   title: string;
   description: string;
   fossils: Fossils;
+  author: AuthorEntity;
 };
 
 export type Fossils = FossilEntity[];

@@ -10,6 +10,7 @@ type Props = {
 
 export default function Event({ event }: Props) {
   const { open, onClose, handleOpen } = useDisclosure();
+
   return (
     <EventDialog open={open} onClose={onClose} event={event}>
       <div

@@ -1,8 +1,5 @@
+import { cn } from "lib";
 import { ComponentPropsWithoutRef } from "react";
-
-function classNames(...classes: Array<string>) {
-  return classes.filter(Boolean).join(" ");
-}
 
 const classes = {
   base: "text-xs h-7 px-2 inline-flex font-medium items-center ring-1 rounded-full ml-auto capitalize relative",
@@ -47,7 +44,7 @@ export default function Tag({
   children,
   ...otherProps
 }: TagProps) {
-  const className = classNames(
+  const className = cn(
     classes.base,
     isSelected ? "border-[2px] border-emerald-500/80" : "",
     classes.color[color],

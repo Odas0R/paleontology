@@ -1,12 +1,11 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { cn } from "lib";
 import Image from "next/image";
 import { useAuth } from "providers";
 import { Fragment, ReactNode, useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { FossilService } from "services";
 import { EventEntity, Fossils } from "types";
-
-import CheckboxFossil from "./CheckboxFossil";
 
 type EventFormProps = {
   children: ReactNode;
@@ -29,15 +28,29 @@ export default function EventForm({
   onSubmit,
   onClose,
 }: EventFormProps) {
+  const { user } = useAuth();
+  const [fossils, setFossils] = useState<Fossils>([]);
+
   const {
     control,
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EventFormData>();
+  } = useForm<EventFormData>({
+    defaultValues: {
+      title: initialValue?.title,
+      description: initialValue?.description,
+    },
+  });
 
-  const { user } = useAuth();
-  const [fossils, setFossils] = useState<Fossils>([]);
+  const eventFossils = useWatch({
+    control,
+    name: "fossils",
+  });
+
+  const isFossilSelected = (id: string) =>
+    eventFossils?.filter(f => f === id).length > 0;
 
   useEffect(() => {
     const getData = async () => {
@@ -50,11 +63,6 @@ export default function EventForm({
 
     getData();
   }, [user]);
-
-  const { fields, append } = useFieldArray({
-    name: "fossils" as never,
-    control,
-  });
 
   return (
     <Fragment>
@@ -118,7 +126,6 @@ export default function EventForm({
                                 type="text"
                                 id="title"
                                 className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                defaultValue={initialValue?.title}
                                 {...register("title", { required: true })}
                               />
                               {errors.title?.type === "required" && (
@@ -138,7 +145,6 @@ export default function EventForm({
                               <textarea
                                 id="description"
                                 className="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                defaultValue={initialValue?.description}
                                 {...register("description", { required: true })}
                               />
                               {errors.description?.type === "required" && (
@@ -147,38 +153,50 @@ export default function EventForm({
                                 </p>
                               )}
                             </div>
-
-                            <div className="col-span-6">
-                              <ul>
-                                {fields.map((field, index) => (
-                                  <li key={field.id}>
-                                    <CheckboxFossil
-                                      key={index}
-                                      {...register(`fossils.${index}`)}
-                                    />
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
                           </div>
                         </div>
-                      </div>
-                      <span className="mb-2">
-                        Click on the fossils you want to select
-                      </span>
-                      <div className="justify-center grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-3 gap-4">
-                        {fossils.map((fossil, index) => (
-                          <div key={index} onClick={() => append(fossil)}>
-                            <div className="group relative aspect-w-1 aspect-h-1 hover:scale-[1.02] transition-all hover:z-10 border-[2px]  rounded-lg border-emerald-500/80">
-                              <Image
-                                className="object-cover rounded-lg"
-                                src={fossil.img_src}
-                                layout="fill"
-                                alt=""
-                              />
-                            </div>
+
+                        <div className="col-span-6 p-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-3">
+                            Pick the Fossils
+                          </label>
+                          <div className="justify-center grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            {fossils.map((fossil, index) => (
+                              <div
+                                key={index}
+                                onClick={() =>
+                                  !isFossilSelected(fossil.id)
+                                    ? setValue("fossils", [
+                                        ...(eventFossils ?? []),
+                                        fossil.id,
+                                      ])
+                                    : setValue(
+                                        "fossils",
+                                        eventFossils?.filter(
+                                          f => f !== fossil.id,
+                                        ),
+                                      )
+                                }
+                              >
+                                <div
+                                  className={cn(
+                                    "group relative aspect-w-1 aspect-h-1 hover:scale-[1.02] transition-all rounded-lg border-[2px] border-transparent",
+                                    isFossilSelected(fossil.id)
+                                      ? "border-emerald-500"
+                                      : "",
+                                  )}
+                                >
+                                  <Image
+                                    className="object-cover rounded-lg"
+                                    src={fossil.img_src}
+                                    layout="fill"
+                                    alt=""
+                                  />
+                                </div>
+                              </div>
+                            ))}
                           </div>
-                        ))}
+                        </div>
                       </div>
 
                       <div className="px-4 py-3 text-right sm:px-6">

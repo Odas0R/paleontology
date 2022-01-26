@@ -2,7 +2,7 @@
   "name": "paleontology",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -54,5 +54,6 @@
     "*.{js,json,ts,tsx}": [
       "yarn format"
     ]
-  }
+  },
+  "packageManager": "yarn@3.1.1"
 }
