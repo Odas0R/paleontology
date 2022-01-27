@@ -74,11 +74,6 @@ services:
       GOTRUE_SMS_AUTOCONFIRM: 'true'
       GOTRUE_LOG_LEVEL: DEBUG
       GOTRUE_OPERATOR_TOKEN: super-secret-operator-token
-
-      GOTRUE_EXTERNAL_GOOGLE_ENABLED: 'true'
-      GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID: 323674449364-vj4tgjuej88fo2st4tksm5jobtr5i0ir.apps.googleusercontent.com
-      GOTRUE_EXTERNAL_GOOGLE_SECRET: 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
-      GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI: http://localhost:3000/callback
   rest:
     container_name: postgrest-service
     image: postgrest/postgrest:v9.0.0 
