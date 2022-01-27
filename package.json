@@ -8,14 +8,14 @@
     "lint": "next lint",
     "type": "tsc --project tsconfig.json --pretty --noEmit",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
-    "format": "yarn prettier --write",
-    "format:check": "yarn prettier --list-different",
+    "format": "npm run prettier --write",
+    "format:check": "npm run prettier --list-different",
     "docker:start": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "docker:restart": "docker-compose restart",
-    "pre-commit": "npm-run-all --parallel type && lint-staged",
+    "pre-commit": "npm-run-all --parallel type lint-staged",
     "prepare": "husky install",
-    "husky:pre-commit": "npx husky add .husky/pre-commit 'yarn pre-commit'"
+    "husky:pre-commit": "npx husky add .husky/pre-commit 'npm run pre-commit'"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
@@ -40,7 +40,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "express": "^4.17.2",
     "husky": "^7.0.0",
-    "lint-staged": "^12.1.5",
+    "lint-staged": "^12.3.2",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
@@ -52,8 +52,7 @@
       "eslint --max-warnings=0 --fix --ignore-path .gitignore"
     ],
     "*.{js,json,ts,tsx}": [
-      "yarn format"
+      "npm run format"
     ]
-  },
-  "packageManager": "yarn@3.1.1"
+  }
 }
